@@ -1,0 +1,330 @@
+---
+/*
+<!-- ============================================================
+     TEXTOS PARA REVISIÓN — patrocinios.astro
+     ============================================================
+
+── HERO ──
+  eyebrow:  "Respaldos"
+  título:   "Quiénes apoyan esta iniciativa."
+  bajada:   "Nuestra propuesta cuenta con el respaldo de autoridades
+             y dirigentes de la Provincia del Choapa que reconocen
+             la urgencia de dar un destino claro a los fondos del
+             royalty minero en los territorios que conviven con la
+             minería y la escasez hídrica."
+
+── NOTA LEGAL PRIVACIDAD ──
+  "Por respeto a la privacidad de cada patrocinador, esta página
+   muestra únicamente nombre y cargo institucional. Los documentos
+   de respaldo originales están disponibles para el jurado del
+   Torneo Delibera cuando sean solicitados."
+
+── PIE DE SECCIÓN ──
+  "¿Quieres respaldar esta iniciativa? Escríbenos."
+
+     ============================================================ -->
+*/
+
+import Base from '../layouts/Base.astro';
+import patrocinios from '../content/patrocinios.json';
+
+// Iniciales a partir del nombre (máx. 2 caracteres)
+function iniciales(nombre: string): string {
+  return nombre
+    .replace(/[\[\]]/g, '')        // quita corchetes de placeholders
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0].toUpperCase())
+    .join('');
+}
+---
+
+<Base
+  title="Patrocinios"
+  description="Autoridades y dirigentes que respaldan la Iniciativa Juvenil de Ley de Terechillas del Choapa para el Torneo Delibera 2026."
+>
+
+  <!-- ══ HERO ══ -->
+  <section class="pa-hero">
+    <div class="pa-hero__inner">
+      <p class="pa-eyebrow">Respaldos</p>
+      <h1 class="pa-title">Quiénes apoyan esta&nbsp;iniciativa.</h1>
+      <p class="pa-bajada">
+        Nuestra propuesta cuenta con el respaldo de autoridades y
+        dirigentes de la Provincia del Choapa que reconocen la urgencia
+        de dar un destino claro a los fondos del royalty minero en los
+        territorios que conviven con la minería y la escasez hídrica.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ NOTA DE PRIVACIDAD ══ -->
+  <div class="pa-aviso">
+    <div class="pa-aviso__inner">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+           viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>
+        Por respeto a la privacidad de cada patrocinador, esta página
+        muestra únicamente nombre y cargo institucional. Los documentos
+        de respaldo originales están disponibles para el jurado del
+        Torneo Delibera cuando sean solicitados.
+      </p>
+    </div>
+  </div>
+
+  <!-- ══ GRILLA DE PATROCINADORES ══ -->
+  <section class="pa-grilla">
+    <div class="pa-grilla__inner">
+      <ul class="pa-grid" role="list">
+        {patrocinios.map((p) => (
+          <li class="pa-card">
+            <div class="pa-card__avatar" aria-hidden="true">
+              {iniciales(p.nombre)}
+            </div>
+            <div class="pa-card__info">
+              <p class="pa-card__nombre">{p.nombre}</p>
+              <p class="pa-card__cargo">{p.cargo}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ PIE ══ -->
+  <section class="pa-pie">
+    <div class="pa-pie__inner">
+      <p class="pa-pie__texto">¿Quieres respaldar esta iniciativa?</p>
+      <a href="mailto:terechillas@example.com" class="pa-pie__cta">
+        Escríbenos
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+</Base>
+
+<style>
+  /* ══ HERO ══ */
+  .pa-hero {
+    padding: calc(var(--nav-height, 64px) + 4rem) 1.5rem 5rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%,
+        rgba(200,146,42,0.09) 0%, transparent 65%),
+      #1a2942;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%,
+        rgba(200,146,42,0.09) 0%, transparent 65%),
+      var(--color-bg, #1a2942);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .pa-hero__inner {
+    max-width: 620px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .pa-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+
+  .pa-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.9rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .pa-bajada {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.75;
+    max-width: 500px;
+  }
+
+  /* ══ AVISO PRIVACIDAD ══ */
+  .pa-aviso {
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 1rem 1.5rem;
+  }
+
+  .pa-aviso__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .pa-aviso__inner svg {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    opacity: 0.7;
+  }
+
+  /* ══ GRILLA ══ */
+  .pa-grilla {
+    padding: 4.5rem 1.5rem 5rem;
+    background-color: #1a2942;
+    background-color: var(--color-bg, #1a2942);
+  }
+
+  .pa-grilla__inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .pa-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* Tarjeta */
+  .pa-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.4rem 1.25rem;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid rgba(200,146,42,0.35);
+    border-radius: 8px;
+    transition: background 0.2s, border-left-color 0.2s, transform 0.2s;
+  }
+
+  .pa-card:hover {
+    background: rgba(255,255,255,0.07);
+    border-left-color: #c8922a;
+    border-left-color: var(--color-accent, #c8922a);
+    transform: translateY(-2px);
+  }
+
+  /* Avatar con iniciales */
+  .pa-card__avatar {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(200,146,42,0.1);
+    border: 1px solid rgba(200,146,42,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    letter-spacing: 0.03em;
+    user-select: none;
+  }
+
+  /* Info */
+  .pa-card__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .pa-card__nombre {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 0.97rem;
+    font-weight: 600;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.3;
+    /* trunca nombres muy largos */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .pa-card__cargo {
+    font-size: 0.77rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.4;
+  }
+
+  @media (max-width: 720px) {
+    .pa-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 440px) {
+    .pa-grid { grid-template-columns: 1fr; }
+    .pa-card__nombre { white-space: normal; }
+  }
+
+  /* ══ PIE ══ */
+  .pa-pie {
+    padding: 3.5rem 1.5rem;
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+  }
+
+  .pa-pie__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pa-pie__texto {
+    font-size: 1rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+  }
+
+  .pa-pie__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200,146,42,0.3);
+    padding-bottom: 0.1rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .pa-pie__cta:hover {
+    color: #e0b254;
+    color: var(--color-accent-light, #e0b254);
+    border-color: #e0b254;
+  }
+</style>

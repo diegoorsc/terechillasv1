@@ -1,6 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import BloqueComun from '../components/BloqueComun.astro';
+
+// ── VIDEO ──────────────────────────────────────────────────────
+// Cuando el video esté listo, pega aquí el src del embed de
+// YouTube o Vimeo. Ejemplo YouTube:
+//   https://www.youtube.com/embed/VIDEO_ID
+// Ejemplo Vimeo:
+//   https://player.vimeo.com/video/VIDEO_ID
+// Mientras esté vacío se muestra el placeholder.
+const videoUrl = "";
 ---
 
 <Base
@@ -78,6 +87,49 @@ import BloqueComun from '../components/BloqueComun.astro';
 
   <!-- BLOQUE COMÚN -->
   <BloqueComun />
+
+  <!-- SECCIÓN VIDEO -->
+  <section class="video-section">
+    <div class="video-inner">
+      <p class="video-eyebrow">Nuestra presentación</p>
+      <h2 class="video-title">Míranos en acción.</h2>
+
+      <div class="video-frame-wrap">
+        {videoUrl ? (
+          /* ── VIDEO REAL ── reemplazar videoUrl arriba para activar */
+          <iframe
+            src={videoUrl}
+            title="Presentación Terechillas del Choapa — Torneo Delibera 2026"
+            class="video-iframe"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        ) : (
+          /* ── PLACEHOLDER mientras el video no está listo ── */
+          <div class="video-placeholder" aria-label="Video próximamente">
+            <div class="video-placeholder__icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                <polygon
+                  points="26,20 26,44 48,32"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="1"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <p class="video-placeholder__label">Video próximamente</p>
+            <p class="video-placeholder__sub">
+              Nuestra presentación ante el Torneo Delibera 2026<br />
+              estará disponible aquí cuando se publique.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -271,5 +323,99 @@ import BloqueComun from '../components/BloqueComun.astro';
 
   .hero-cta:hover .hero-cta__arrow {
     transform: translateY(3px);
+  }
+
+  /* ── SECCIÓN VIDEO ── */
+  .video-section {
+    padding: 5rem 1.5rem;
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .video-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .video-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+
+  .video-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  /* Wrapper 16:9 responsivo */
+  .video-frame-wrap {
+    width: 100%;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* iframe del video real */
+  .video-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Placeholder */
+  .video-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    background: #1a2942;
+    background: var(--color-bg, #1a2942);
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+
+  .video-placeholder__icon {
+    width: 72px;
+    height: 72px;
+    opacity: 0.85;
+  }
+  .video-placeholder__icon svg { width: 100%; height: 100%; }
+
+  .video-placeholder__label {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    letter-spacing: 0.02em;
+  }
+
+  .video-placeholder__sub {
+    font-size: 0.85rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    line-height: 1.6;
   }
 </style>
