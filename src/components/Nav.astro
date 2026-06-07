@@ -78,8 +78,9 @@ function isActive(href: string) {
     left: 0;
     right: 0;
     z-index: 100;
-    background: var(--color-bg-dark);
-    border-bottom: 1px solid var(--color-border-dim);
+    background: #111d30;                           /* azul muy oscuro — literal */
+    background: var(--color-bg-dark, #111d30);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
   }
 
   .nav-inner {
@@ -106,22 +107,25 @@ function isActive(href: string) {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--color-accent);
+    background: #c8922a;                          /* dorado — literal */
+    background: var(--color-accent, #c8922a);
     flex-shrink: 0;
     box-shadow: 0 0 8px rgba(200, 146, 42, 0.5);
   }
 
   .nav-brand__name {
-    font-family: var(--font-display);
+    font-family: var(--font-display, 'Georgia', serif);
     font-size: 1.05rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: #f0f4f8;                               /* blanco — literal */
+    color: var(--color-text, #f0f4f8);
     letter-spacing: 0.01em;
     transition: color 0.2s;
   }
 
   .nav-brand:hover .nav-brand__name {
-    color: var(--color-accent-light);
+    color: #e0b254;
+    color: var(--color-accent-light, #e0b254);
   }
 
   /* Links desktop */
@@ -138,15 +142,18 @@ function isActive(href: string) {
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.04em;
-    color: var(--color-text-muted);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
     text-decoration: none;
-    border-radius: var(--radius);
+    border-radius: 6px;
+    border-radius: var(--radius, 6px);
     transition: color 0.2s, background 0.2s;
   }
 
   .nav-link:hover,
   .nav-link--active {
-    color: var(--color-accent-light);
+    color: #e0b254;
+    color: var(--color-accent-light, #e0b254);
   }
 
   .nav-link--active {

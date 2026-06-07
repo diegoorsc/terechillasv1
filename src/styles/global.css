@@ -42,7 +42,9 @@
 
 html {
   font-family: var(--font-sans);
+  background-color: #1a2942; /* --color-bg literal como fallback garantizado */
   background-color: var(--color-bg);
+  color: #f0f4f8; /* --color-text literal */
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -51,6 +53,8 @@ html {
 
 body {
   min-height: 100vh;
+  background-color: #1a2942;
+  background-color: var(--color-bg);
 }
 
 a {
