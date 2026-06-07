@@ -110,27 +110,27 @@
         aria-hidden="true"
       >
         <!--
-          Radio del círculo: 80  →  Circunferencia: 2π·80 ≈ 502.65
-          Cada segmento usa stroke-dasharray para cubrir su porcentaje.
-          El punto de inicio (stroke-dashoffset) va acumulándose.
+          C = 2π·80 = 502.655  (sin pathLength para máxima compatibilidad)
+          Fórmula: dashoffset = C/4 − acc·C  (donde acc es fracción acumulada desde 12 en punto)
+          Orden horario desde 12: eco(20%) → social(20%) → reserva(10%) → libre(50%)
 
-          Orden: 20% eco (100.53) → 20% social (100.53) → 10% reserva (50.27) → 50% libre (251.33)
-          Offset inicial = -502.65*0.25 para empezar arriba (12 en punto)
-
-          Variables de JS animan stroke-dashoffset desde total hasta destino.
+          eco:     acc=0.00  dashoffset= 125.664  dasharray="100.531 402.124"
+          social:  acc=0.20  dashoffset=  25.133  dasharray="100.531 402.124"
+          reserva: acc=0.40  dashoffset= -75.398  dasharray=" 50.265 452.390"
+          libre:   acc=0.50  dashoffset=-125.664  dasharray="251.328 251.327"
+          Suma: 100.531+100.531+50.265+251.328 = 502.655 ✓ círculo completo
         -->
 
-        <!-- 50% Libre Disposición — gris azul — va primero (fondo) -->
+        <!-- Orden de pintado: atrás→adelante. libre primero (más grande) -->
+        <!-- 50% Libre Disposición — gris azul -->
         <circle
           class="ps-seg" id="seg-libre"
           cx="110" cy="110" r="80"
           fill="none"
           stroke="#4a6080"
           stroke-width="36"
-          stroke-dasharray="251.33 251.33"
-          stroke-dashoffset="-125.66"
-          pathLength="502.65"
-          data-seg
+          stroke-dasharray="251.328 251.327"
+          stroke-dashoffset="-125.664"
         />
         <!-- 10% Reserva — dorado -->
         <circle
@@ -139,10 +139,8 @@
           fill="none"
           stroke="#c8922a"
           stroke-width="36"
-          stroke-dasharray="50.27 452.39"
-          stroke-dashoffset="-376.99"
-          pathLength="502.65"
-          data-seg
+          stroke-dasharray="50.265 452.390"
+          stroke-dashoffset="-75.398"
         />
         <!-- 20% Social — azul -->
         <circle
@@ -151,10 +149,8 @@
           fill="none"
           stroke="#4a90d9"
           stroke-width="36"
-          stroke-dasharray="100.53 402.12"
-          stroke-dashoffset="-276.46"
-          pathLength="502.65"
-          data-seg
+          stroke-dasharray="100.531 402.124"
+          stroke-dashoffset="25.133"
         />
         <!-- 20% Ecológica — verde -->
         <circle
@@ -163,10 +159,8 @@
           fill="none"
           stroke="#4caf7d"
           stroke-width="36"
-          stroke-dasharray="100.53 402.12"
-          stroke-dashoffset="-175.93"
-          pathLength="502.65"
-          data-seg
+          stroke-dasharray="100.531 402.124"
+          stroke-dashoffset="125.664"
         />
 
         <!-- Texto central -->
@@ -707,41 +701,44 @@
   solSections.forEach((el) => solObserver.observe(el));
 
   // ── 2. Animación de la dona ──────────────────────────────
+  // C = 2π·80 = 502.655
+  // dashoffset = C/4 − acc·C  (segmento empieza donde termina el anterior)
+  // La animación crece stroke-dasharray de "0 C" al valor final;
+  // stroke-dashoffset se fija una sola vez y no se toca más.
   function animateDona(dona: SVGElement) {
     dona.classList.add('is-animated');
 
-    const segs = dona.querySelectorAll<SVGCircleElement>('.ps-seg');
-    const circumference = 502.65;
+    const C = 502.655;
 
-    // Datos de cada segmento: porcentaje y offset de inicio (en fracción)
-    // Orden de aparición: eco → social → reserva → libre
-    const segData: { el: SVGCircleElement; pct: number; startOffset: number }[] = [
-      { el: dona.querySelector('#seg-eco')!     as SVGCircleElement, pct: 0.20, startOffset: -0.35 },
-      { el: dona.querySelector('#seg-social')!  as SVGCircleElement, pct: 0.20, startOffset: -0.55 },
-      { el: dona.querySelector('#seg-reserva')! as SVGCircleElement, pct: 0.10, startOffset: -0.75 },
-      { el: dona.querySelector('#seg-libre')!   as SVGCircleElement, pct: 0.50, startOffset: -0.25 },
+    const segData = [
+      // Orden de aparición (stagger visual): eco → social → reserva → libre
+      { id: '#seg-eco',     len: 100.531, dashoffset:  125.664 },
+      { id: '#seg-social',  len: 100.531, dashoffset:   25.133 },
+      { id: '#seg-reserva', len:  50.265, dashoffset:  -75.398 },
+      { id: '#seg-libre',   len: 251.328, dashoffset: -125.664 },
     ];
 
-    const duration = 900; // ms por segmento
-    const stagger  = 120; // ms entre segmentos
+    const duration = 800; // ms para que cada arco crezca
+    const stagger  = 150; // ms entre el inicio de cada arco
 
-    segData.forEach(({ el, pct, startOffset }, i) => {
+    segData.forEach(({ id, len, dashoffset }, i) => {
+      const el = dona.querySelector<SVGCircleElement>(id);
       if (!el) return;
-      const segLength  = pct * circumference;
-      const gapLength  = circumference - segLength;
-      const finalOffset = startOffset * circumference;
 
+      const gap = C - len;
+
+      // 1. Fijar estado inicial: visible pero con arco = 0
+      el.style.transition = 'none';
+      el.style.opacity = '1';
+      el.style.strokeDashoffset = String(dashoffset); // posición correcta, fija
+      el.style.strokeDasharray  = `0 ${C}`;
+
+      // 2. Disparar la animación del arco tras el stagger
       setTimeout(() => {
-        el.style.opacity = '1';
-        // Partimos con dasharray = 0 y animamos a su valor final
-        el.style.strokeDasharray = `0 ${circumference}`;
-        el.style.strokeDashoffset = String(finalOffset);
-        el.style.transition = 'none';
-
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            el.style.transition = `stroke-dasharray ${duration}ms cubic-bezier(0.4,0,0.2,1)`;
-            el.style.strokeDasharray = `${segLength} ${gapLength}`;
+            el.style.transition = `stroke-dasharray ${duration}ms cubic-bezier(0.35,0,0.15,1)`;
+            el.style.strokeDasharray = `${len} ${gap}`;
           });
         });
       }, i * stagger);
