@@ -1,0 +1,108 @@
+# ── Decap CMS · Terechillas del Choapa ─────────────────────────
+# Documentación: https://decapcms.org/docs/
+
+# Backend: Netlify Git Gateway (requiere Identity + Git Gateway activos)
+backend:
+  name: git-gateway
+  branch: main
+
+# Carpeta donde se guardan las imágenes subidas desde el CMS
+media_folder: public/images
+public_folder: /images
+
+# Idioma del panel
+locale: es
+
+# ── COLECCIONES ────────────────────────────────────────────────
+collections:
+
+  # ── 1. NOTICIAS / NOVEDADES ──────────────────────────────────
+  # Archivos Markdown individuales en src/content/noticias/
+  - name: noticias
+    label: Noticias
+    label_singular: Noticia
+    folder: src/content/noticias
+    create: true
+    delete: true
+    slug: "{{slug}}"          # nombre del archivo = versión slug del título
+    format: frontmatter       # YAML frontmatter + cuerpo Markdown
+    fields:
+      - label: Título
+        name: titulo
+        widget: string
+        hint: Título principal de la noticia.
+
+      - label: Fecha
+        name: fecha
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD/MM/YYYY"
+        time_format: false
+        hint: Fecha de publicación.
+
+      - label: Resumen
+        name: resumen
+        widget: text
+        hint: Descripción corta (aparece en el listado de noticias).
+
+      - label: Cuerpo
+        name: body
+        widget: markdown
+        hint: Contenido completo de la noticia.
+
+  # ── 2. PATROCINADORES ────────────────────────────────────────
+  # Edita el archivo JSON src/content/patrocinios.json
+  # El JSON tiene la estructura: { "items": [{nombre, cargo}, ...] }
+  - name: patrocinios
+    label: Patrocinadores
+    files:
+      - name: lista
+        label: Lista de patrocinadores
+        file: src/content/patrocinios.json
+        fields:
+          - label: Patrocinadores
+            name: items
+            widget: list
+            summary: "{{fields.nombre}} — {{fields.cargo}}"
+            fields:
+              - label: Nombre completo
+                name: nombre
+                widget: string
+              - label: Cargo / Rol
+                name: cargo
+                widget: string
+
+  # ── 3. EQUIPO ────────────────────────────────────────────────
+  # Edita el archivo JSON src/content/equipo/integrantes.json
+  # El JSON tiene la estructura: { "integrantes": [{nombre, rol, foto, iniciales}] }
+  - name: equipo
+    label: Equipo
+    files:
+      - name: integrantes
+        label: Integrantes del equipo
+        file: src/content/equipo/integrantes.json
+        fields:
+          - label: Integrantes
+            name: integrantes
+            widget: list
+            summary: "{{fields.nombre}} — {{fields.rol}}"
+            fields:
+              - label: Nombre completo
+                name: nombre
+                widget: string
+              - label: Rol
+                name: rol
+                widget: string
+                hint: "Ej: Presidente, Integrante"
+              - label: Foto
+                name: foto
+                widget: image
+                required: false
+                hint: Foto circular del integrante (sube a public/equipo/).
+              - label: Iniciales
+                name: iniciales
+                widget: string
+                hint: "2 letras para el avatar (ej: DS, SC)"
+                pattern:
+                  - "^[A-Z]{1,2}$"
+                  - "1 o 2 letras mayúsculas"

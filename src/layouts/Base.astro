@@ -42,6 +42,12 @@ const currentPath = Astro.url.pathname;
     />
 
     <!-- global.css importado en frontmatter para que Astro lo procese correctamente -->
+
+    <!-- Netlify Identity Widget ─────────────────────────────────────────
+         Permite que el botón "Log in" de cualquier página del sitio abra
+         el flujo de autenticación y redirija a /admin/ tras hacer login.
+         Solo añade peso cuando el usuario abre el modal; el script es lazy. -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
 
   <body>
@@ -52,5 +58,20 @@ const currentPath = Astro.url.pathname;
     </main>
 
     <Footer />
+
+    <!-- Redirección post-login de Netlify Identity ──────────────────────
+         Cuando el usuario completa el login en cualquier página, lo lleva
+         a /admin/. Sin esto, el widget redirige a la raíz del sitio. -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/';
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

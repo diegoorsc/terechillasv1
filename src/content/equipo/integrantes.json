@@ -1,26 +1,8 @@
-[
-  {
-    "nombre": "Diego Salas",
-    "rol": "Presidente",
-    "foto": "/equipo/diego-salas.jpg",
-    "iniciales": "DS"
-  },
-  {
-    "nombre": "Sofía Carvajal",
-    "rol": "Integrante",
-    "foto": "/equipo/sofia-carvajal.jpg",
-    "iniciales": "SC"
-  },
-  {
-    "nombre": "Sofía Trigo",
-    "rol": "Integrante",
-    "foto": "/equipo/sofia-trigo.jpg",
-    "iniciales": "ST"
-  },
-  {
-    "nombre": "Florencia Dabed",
-    "rol": "Integrante",
-    "foto": "/equipo/florencia-dabed.jpg",
-    "iniciales": "FD"
-  }
-]
+{
+  "integrantes": [
+    { "nombre": "Diego Salas",      "rol": "Presidente", "foto": "/equipo/diego-salas.jpg",      "iniciales": "DS" },
+    { "nombre": "Sofía Carvajal",   "rol": "Integrante", "foto": "/equipo/sofia-carvajal.jpg",   "iniciales": "SC" },
+    { "nombre": "Sofía Trigo",      "rol": "Integrante", "foto": "/equipo/sofia-trigo.jpg",      "iniciales": "ST" },
+    { "nombre": "Florencia Dabed",  "rol": "Integrante", "foto": "/equipo/florencia-dabed.jpg",  "iniciales": "FD" }
+  ]
+}
