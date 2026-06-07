@@ -2,7 +2,9 @@
 :root {
   /* Fondos */
   --color-bg:          #1a2942;   /* azul marino profundo */
+  --color-bg-dark:     #111d30;   /* azul muy oscuro (footer, nav) */
   --color-bg-mid:      #223354;   /* azul medio para tarjetas/secciones */
+  --color-bg-section:  #1e2f4a;   /* fondo de sección alternativa (BloqueComun) */
   --color-bg-light:    #2c4068;   /* azul más claro para hover/borders */
 
   /* Acento */
@@ -18,10 +20,14 @@
   /* Utilidades */
   --color-white:       #ffffff;
   --color-border:      rgba(200, 146, 42, 0.25); /* borde dorado semitransparente */
+  --color-border-dim:  rgba(255, 255, 255, 0.08); /* borde sutil */
 
-  /* Tipografía */
-  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
-  --font-display: 'Georgia', 'Times New Roman', serif;
+  /* Tipografía — cargadas desde Google Fonts en Base.astro */
+  --font-display: 'Fraunces', 'Georgia', serif;       /* títulos serif elegante */
+  --font-sans:    'Source Sans 3', 'Segoe UI', system-ui, sans-serif; /* cuerpo */
+
+  /* Nav */
+  --nav-height: 64px;
 
   /* Espaciado base */
   --radius: 6px;
@@ -40,6 +46,7 @@ html {
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
 }
 
 body {

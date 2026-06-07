@@ -1,0 +1,84 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-marca">
+      <span class="footer-dot" aria-hidden="true"></span>
+      <span class="footer-nombre">Terechillas del Choapa</span>
+    </div>
+
+    <div class="footer-meta">
+      <span>Colegio Santa Teresa · Illapel</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>Región de Coquimbo</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>Torneo Delibera 2026</span>
+    </div>
+
+    <p class="footer-copy">
+      &copy; {year} Terechillas del Choapa. Sitio elaborado con fines educativos.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-dark);
+    border-top: 1px solid var(--color-border-dim);
+    padding: 2.5rem 1.5rem;
+    margin-top: auto;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .footer-marca {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .footer-nombre {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    letter-spacing: 0.03em;
+  }
+
+  .sep {
+    color: var(--color-border);
+  }
+
+  .footer-copy {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+  }
+</style>

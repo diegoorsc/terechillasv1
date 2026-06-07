@@ -1,0 +1,263 @@
+---
+export interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+const links = [
+  { href: '/',           label: 'Inicio' },
+  { href: '/propuesta',  label: 'Propuesta' },
+  { href: '/equipo',     label: 'Equipo' },
+  { href: '/territorio', label: 'Territorio' },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="nav-wrapper">
+  <nav class="nav-inner" aria-label="Navegación principal">
+
+    <!-- Marca -->
+    <a href="/" class="nav-brand" aria-label="Terechillas del Choapa — inicio">
+      <span class="nav-brand__dot" aria-hidden="true"></span>
+      <span class="nav-brand__name">Terechillas del Choapa</span>
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="nav-links" role="list">
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={['nav-link', { 'nav-link--active': isActive(href) }]}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- Hamburguesa móvil -->
+    <button
+      class="nav-hamburger"
+      id="nav-toggle"
+      aria-controls="nav-mobile-menu"
+      aria-expanded="false"
+      aria-label="Abrir menú"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Menú móvil desplegable -->
+  <div class="nav-mobile" id="nav-mobile-menu" aria-hidden="true">
+    <ul role="list">
+      {links.map(({ href, label }) => (
+        <li>
+          <a
+            href={href}
+            class:list={['nav-mobile__link', { 'nav-mobile__link--active': isActive(href) }]}
+          >
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<style>
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--color-bg-dark);
+    border-bottom: 1px solid var(--color-border-dim);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  /* Marca */
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-brand__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(200, 146, 42, 0.5);
+  }
+
+  .nav-brand__name {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+  }
+
+  .nav-brand:hover .nav-brand__name {
+    color: var(--color-accent-light);
+  }
+
+  /* Links desktop */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.4em 0.85em;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-link:hover,
+  .nav-link--active {
+    color: var(--color-accent-light);
+  }
+
+  .nav-link--active {
+    background: rgba(200, 146, 42, 0.08);
+  }
+
+  /* Hamburguesa */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--color-text-muted);
+    border-radius: 2px;
+    transition: transform 0.25s, opacity 0.25s, background 0.2s;
+    transform-origin: center;
+  }
+
+  .nav-hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    background: var(--color-accent);
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    background: var(--color-accent);
+  }
+
+  /* Menú móvil */
+  .nav-mobile {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.3s ease;
+    background: var(--color-bg-dark);
+    border-top: 1px solid var(--color-border-dim);
+  }
+
+  .nav-mobile[aria-hidden="false"] {
+    max-height: 280px;
+  }
+
+  .nav-mobile ul {
+    list-style: none;
+    padding: 0.5rem 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .nav-mobile__link {
+    display: block;
+    padding: 0.65em 0.75em;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: var(--radius);
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .nav-mobile__link:hover,
+  .nav-mobile__link--active {
+    color: var(--color-accent-light);
+    background: rgba(200, 146, 42, 0.07);
+  }
+
+  /* Responsive */
+  @media (max-width: 680px) {
+    .nav-links {
+      display: none;
+    }
+    .nav-hamburger {
+      display: flex;
+    }
+    .nav-mobile {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu   = document.getElementById('nav-mobile-menu');
+
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      menu.setAttribute('aria-hidden', String(expanded));
+    });
+
+    // Cierra al hacer clic en un link
+    menu.querySelectorAll('a').forEach(a =>
+      a.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+      })
+    );
+  }
+</script>

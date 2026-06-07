@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Territorio" description="El Choapa: territorio, minería y sequía.">
+  <section class="placeholder">
+    <div class="placeholder-inner">
+      <div class="eyebrow">Nuestro contexto</div>
+      <h1>El Territorio</h1>
+      <p>Contenido en desarrollo.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .placeholder {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: calc(var(--nav-height) + 2rem) 1.5rem 4rem;
+    text-align: center;
+  }
+  .placeholder-inner { max-width: 600px; }
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+  p { color: var(--color-text-muted); }
+</style>

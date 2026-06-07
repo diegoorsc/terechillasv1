@@ -1,70 +1,265 @@
 ---
 import Base from '../layouts/Base.astro';
+import BloqueComun from '../components/BloqueComun.astro';
 ---
 
-<Base title="Terechillas del Choapa">
-  <section class="hero">
+<Base
+  title="Inicio"
+  description="Terechillas del Choapa propone una reforma a la Ley N° 21.591 para un uso socioambiental del royalty minero. Torneo Delibera 2026."
+>
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- Fondo: silueta de cordillera SVG inline de baja opacidad -->
+    <div class="hero-mountains" aria-hidden="true">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M0,320 L0,220 L80,160 L160,200 L260,100 L360,160 L440,80 L540,130 L620,60 L720,120 L800,50 L900,110 L980,40 L1080,100 L1160,60 L1260,120 L1360,80 L1440,130 L1440,320 Z"
+          fill="rgba(200,146,42,0.06)"
+        />
+        <path
+          d="M0,320 L0,260 L100,210 L200,240 L320,170 L420,210 L520,150 L640,190 L740,130 L860,180 L960,120 L1060,170 L1160,140 L1260,180 L1360,150 L1440,180 L1440,320 Z"
+          fill="rgba(255,255,255,0.03)"
+        />
+      </svg>
+    </div>
+
     <div class="hero-content">
-      <div class="badge">⚽ Equipo Escolar</div>
-      <h1>Terechillas del Choapa</h1>
-      <p class="tagline">En construcción</p>
-      <p class="sub">Pronto encontrarás aquí noticias, calendario de partidos,<br />galería y más sobre nuestro equipo.</p>
+      <!-- Badge primario -->
+      <div class="badge badge--primary">
+        <span class="badge-dot" aria-hidden="true"></span>
+        TORNEO DELIBERA XV · 2026
+      </div>
+
+      <!-- Badge secundario -->
+      <div class="badge badge--secondary">MENSAJE PRESIDENCIAL</div>
+
+      <!-- Título -->
+      <h1 class="hero-title">
+        Reforma a la Ley N.° 21.591
+      </h1>
+
+      <!-- Subtítulo itálica -->
+      <p class="hero-subtitle">
+        Para el uso socioambiental de los fondos del Royalty Minero
+      </p>
+
+      <!-- Bajada -->
+      <p class="hero-lead">
+        Proponemos que cada peso del royalty tenga un destino claro:<br class="br-desktop" />
+        ecología, comunidad y futuro.
+      </p>
+
+      <!-- Bloque de datos -->
+      <dl class="hero-data">
+        <div class="hero-data__item">
+          <dt>Equipo</dt>
+          <dd>Terechillas del Choapa</dd>
+        </div>
+        <div class="hero-data__sep" aria-hidden="true"></div>
+        <div class="hero-data__item">
+          <dt>Colegio</dt>
+          <dd>Santa Teresa · Illapel</dd>
+        </div>
+        <div class="hero-data__sep" aria-hidden="true"></div>
+        <div class="hero-data__item">
+          <dt>Región</dt>
+          <dd>Coquimbo</dd>
+        </div>
+      </dl>
+
+      <!-- CTA -->
+      <a href="#bloque-comun" class="hero-cta">
+        Conoce nuestra propuesta
+        <span class="hero-cta__arrow" aria-hidden="true">↓</span>
+      </a>
     </div>
   </section>
+
+  <!-- BLOQUE COMÚN -->
+  <BloqueComun />
 </Base>
 
 <style>
+  /* Hero */
   .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 2rem;
+    padding: calc(var(--nav-height) + 3rem) 1.5rem 5rem;
+    overflow: hidden;
     background:
-      radial-gradient(ellipse at 50% 0%, rgba(200, 146, 42, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,146,42,0.10) 0%, transparent 70%),
       var(--color-bg);
   }
 
+  /* Montañas fondo */
+  .hero-mountains {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hero-mountains svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Contenido */
   .hero-content {
-    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.15rem;
   }
 
+  /* Badges */
   .badge {
-    display: inline-block;
-    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-accent);
-    border: 1px solid var(--color-border);
     border-radius: 999px;
-    padding: 0.35em 1em;
-    margin-bottom: 1.5rem;
+    padding: 0.32em 1.05em;
   }
 
-  h1 {
+  .badge--primary {
+    color: var(--color-accent-light);
+    border: 1px solid var(--color-accent);
+    background: rgba(200,146,42,0.08);
+  }
+
+  .badge--secondary {
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-dim);
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  /* Título */
+  .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
     font-weight: 700;
     color: var(--color-text);
     line-height: 1.1;
     letter-spacing: -0.02em;
-    margin-bottom: 0.75rem;
   }
 
-  .tagline {
-    font-size: clamp(1rem, 2.5vw, 1.4rem);
-    color: var(--color-accent);
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
+  /* Subtítulo itálica */
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    color: var(--color-accent-light);
+    line-height: 1.4;
+    max-width: 580px;
   }
 
-  .sub {
+  /* Bajada */
+  .hero-lead {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
     color: var(--color-text-muted);
-    font-size: 1rem;
-    line-height: 1.7;
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  .br-desktop { display: none; }
+  @media (min-width: 600px) { .br-desktop { display: inline; } }
+
+  /* Bloque de datos */
+  .hero-data {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem 0;
+    margin-top: 0.5rem;
+    border: 1px solid var(--color-border-dim);
+    border-radius: var(--radius-lg);
+    padding: 0.9rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .hero-data__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    padding: 0 1.25rem;
+  }
+
+  .hero-data__item dt {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-dim);
+    font-weight: 600;
+  }
+
+  .hero-data__item dd {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .hero-data__sep {
+    width: 1px;
+    height: 36px;
+    background: var(--color-border-dim);
+  }
+
+  @media (max-width: 520px) {
+    .hero-data__sep { display: none; }
+    .hero-data { flex-direction: column; gap: 0.75rem; }
+  }
+
+  /* CTA */
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    padding: 0.8em 2em;
+    background: var(--color-accent);
+    color: #1a2942;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 18px rgba(200,146,42,0.25);
+  }
+
+  .hero-cta:hover {
+    background: var(--color-accent-light);
+    transform: translateY(-2px);
+    color: #1a2942;
+  }
+
+  .hero-cta__arrow {
+    font-size: 1.1em;
+    transition: transform 0.2s;
+  }
+
+  .hero-cta:hover .hero-cta__arrow {
+    transform: translateY(3px);
   }
 </style>
