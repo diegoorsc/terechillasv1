@@ -1,0 +1,750 @@
+---
+/*
+<!-- ============================================================
+     TEXTOS PARA REVISIÓN — PropuestaSolucion.astro
+     ============================================================
+
+── SECCIÓN 1: ENCABEZADO DE LA DISTRIBUCIÓN ──
+  eyebrow:  "Nuestra reforma"
+  título:   "Una distribución con propósito."
+  bajada:   "La reforma reemplaza la libre disposición absoluta del 50%
+             por una distribución obligatoria con destinos verificables,
+             modificando el DL N.° 3.063 en lo incorporado por el
+             Artículo 17 de la Ley N.° 21.591."
+
+── GRÁFICO DE DONA ──
+  centro:   "DISTRIBUCIÓN / obligatoria"
+  segmentos:
+    20% → Sustentabilidad Ecológica    (verde    #4caf7d)
+    20% → Desarrollo Social Comunitario (azul     #4a90d9)
+    10% → Fondo de Reserva Municipal   (dorado   #c8922a)
+    50% → Libre Disposición            (gris-azul #4a6080)
+
+── SECCIÓN 2: LAS CUATRO TARJETAS ──
+
+  TARJETA 1 — 20% Sustentabilidad Ecológica
+    ícono: 🌿
+    título: "Sustentabilidad Ecológica"
+    porcentaje: "20%"
+    texto: "Financia restauración ambiental, gestión hídrica y medidas de
+            mitigación del impacto minero. Porque el territorio que produce
+            la riqueza debe también recibir su cuidado."
+
+  TARJETA 2 — 20% Desarrollo Social Comunitario
+    ícono: 🤝
+    título: "Desarrollo Social Comunitario"
+    porcentaje: "20%"
+    texto: "Destinado a educación, salud y proyectos que nacen de las
+            propias comunidades. El royalty como inversión en las personas
+            que viven junto a las faenas mineras."
+
+  TARJETA 3 — 10% Fondo de Reserva Municipal
+    ícono: 🛡
+    título: "Fondo de Reserva Municipal"
+    porcentaje: "10%"
+    texto: "Ahorro obligatorio para emergencias comunales. Alineado con
+            los Artículos 41 y 42 de la Constitución sobre estados de
+            excepción: que el municipio no quede sin recursos cuando más
+            los necesita."
+
+  TARJETA 4 — 50% Libre Disposición
+    ícono: ⚖
+    título: "Libre Disposición"
+    porcentaje: "50%"
+    texto: "La autonomía municipal se mantiene para la mitad de los
+            recursos. Los alcaldes siguen decidiendo según su realidad
+            local — pero con rendición de cuentas exigible."
+
+── SECCIÓN 3: CÓMO SE GARANTIZA ──
+  eyebrow:  "Los pilares de la reforma"
+  título:   "¿Cómo se hace exigible?"
+  intro:    "La propuesta responde de antemano a la objeción de autonomía
+             municipal: no elimina libertad, la ordena."
+  pilares:
+    1. Reglas claras de destino
+       "La ley define los cuatro destinos y sus porcentajes mínimos.
+        No hay margen para reclasificar gastos ni vacíos de interpretación."
+    2. Rendición de cuentas obligatoria
+       "Cada municipio debe publicar semestralmente en qué se gastó cada
+        partida. El CPLT fiscaliza. Sin informe, no hay transferencia
+        del período siguiente."
+    3. Participación ciudadana consultiva
+       "Las comunidades tienen voz en la priorización de gastos a través
+        de un mecanismo consultivo (no vinculante). El municipio decide,
+        pero escucha."
+
+── SECCIÓN 4: DESCARGA IJL ──
+  eyebrow:  "Documento oficial"
+  título:   "Iniciativa Juvenil de Ley"
+  texto:    "Lee el texto completo de nuestra propuesta de reforma,
+             fundamentación legal y diagnóstico territorial."
+  botón:    "Descargar la Iniciativa Juvenil de Ley (PDF)"
+  archivo:  /ijl-terechillas.pdf  ← subir el PDF real cuando esté listo
+
+     ============================================================ -->
+*/
+---
+
+<!-- ════════════════════════════════════════════════════════════
+     SECCIÓN 1 — DISTRIBUCIÓN + DONA
+     ════════════════════════════════════════════════════════════ -->
+<section class="ps-wrap" id="propuesta-solucion" data-sol-reveal>
+  <div class="ps-inner">
+
+    <p class="ps-eyebrow">Nuestra reforma</p>
+    <h2 class="ps-title">Una distribución con propósito.</h2>
+    <p class="ps-bajada">
+      La reforma reemplaza la libre disposición absoluta del 50% por una
+      distribución obligatoria con destinos verificables, modificando el
+      DL&nbsp;N.°&nbsp;3.063 en lo incorporado por el Artículo&nbsp;17 de
+      la Ley&nbsp;N.°&nbsp;21.591.
+    </p>
+
+    <!-- Dona SVG -->
+    <div class="ps-dona-wrap" aria-label="Gráfico de distribución del royalty">
+      <svg
+        class="ps-dona"
+        viewBox="0 0 220 220"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-hidden="true"
+      >
+        <!--
+          Radio del círculo: 80  →  Circunferencia: 2π·80 ≈ 502.65
+          Cada segmento usa stroke-dasharray para cubrir su porcentaje.
+          El punto de inicio (stroke-dashoffset) va acumulándose.
+
+          Orden: 20% eco (100.53) → 20% social (100.53) → 10% reserva (50.27) → 50% libre (251.33)
+          Offset inicial = -502.65*0.25 para empezar arriba (12 en punto)
+
+          Variables de JS animan stroke-dashoffset desde total hasta destino.
+        -->
+
+        <!-- 50% Libre Disposición — gris azul — va primero (fondo) -->
+        <circle
+          class="ps-seg" id="seg-libre"
+          cx="110" cy="110" r="80"
+          fill="none"
+          stroke="#4a6080"
+          stroke-width="36"
+          stroke-dasharray="251.33 251.33"
+          stroke-dashoffset="-125.66"
+          pathLength="502.65"
+          data-seg
+        />
+        <!-- 10% Reserva — dorado -->
+        <circle
+          class="ps-seg" id="seg-reserva"
+          cx="110" cy="110" r="80"
+          fill="none"
+          stroke="#c8922a"
+          stroke-width="36"
+          stroke-dasharray="50.27 452.39"
+          stroke-dashoffset="-376.99"
+          pathLength="502.65"
+          data-seg
+        />
+        <!-- 20% Social — azul -->
+        <circle
+          class="ps-seg" id="seg-social"
+          cx="110" cy="110" r="80"
+          fill="none"
+          stroke="#4a90d9"
+          stroke-width="36"
+          stroke-dasharray="100.53 402.12"
+          stroke-dashoffset="-276.46"
+          pathLength="502.65"
+          data-seg
+        />
+        <!-- 20% Ecológica — verde -->
+        <circle
+          class="ps-seg" id="seg-eco"
+          cx="110" cy="110" r="80"
+          fill="none"
+          stroke="#4caf7d"
+          stroke-width="36"
+          stroke-dasharray="100.53 402.12"
+          stroke-dashoffset="-175.93"
+          pathLength="502.65"
+          data-seg
+        />
+
+        <!-- Texto central -->
+        <text x="110" y="104" text-anchor="middle" class="ps-dona-label-top">DISTRIBUCIÓN</text>
+        <text x="110" y="122" text-anchor="middle" class="ps-dona-label-bot">obligatoria</text>
+      </svg>
+
+      <!-- Leyenda -->
+      <ul class="ps-leyenda" role="list">
+        <li class="ps-leyenda__item">
+          <span class="ps-leyenda__dot" style="background:#4caf7d"></span>
+          <span class="ps-leyenda__pct">20%</span>
+          <span class="ps-leyenda__name">Sustentabilidad Ecológica</span>
+        </li>
+        <li class="ps-leyenda__item">
+          <span class="ps-leyenda__dot" style="background:#4a90d9"></span>
+          <span class="ps-leyenda__pct">20%</span>
+          <span class="ps-leyenda__name">Desarrollo Social Comunitario</span>
+        </li>
+        <li class="ps-leyenda__item">
+          <span class="ps-leyenda__dot" style="background:#c8922a"></span>
+          <span class="ps-leyenda__pct">10%</span>
+          <span class="ps-leyenda__name">Fondo de Reserva Municipal</span>
+        </li>
+        <li class="ps-leyenda__item">
+          <span class="ps-leyenda__dot" style="background:#4a6080"></span>
+          <span class="ps-leyenda__pct">50%</span>
+          <span class="ps-leyenda__name">Libre Disposición</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECCIÓN 2 — CUATRO TARJETAS
+     ════════════════════════════════════════════════════════════ -->
+<section class="ps-tarjetas-wrap" data-sol-reveal>
+  <div class="ps-inner">
+    <p class="ps-eyebrow">Los cuatro destinos</p>
+    <h2 class="ps-title ps-title--sm">Cada peso, un propósito claro.</h2>
+
+    <div class="ps-grid">
+
+      <!-- Tarjeta 1: Ecológica -->
+      <article class="ps-card" style="--card-accent: #4caf7d;">
+        <div class="ps-card__icon" aria-hidden="true">🌿</div>
+        <div class="ps-card__pct">20%</div>
+        <h3 class="ps-card__title">Sustentabilidad Ecológica</h3>
+        <p class="ps-card__text">
+          Financia restauración ambiental, gestión hídrica y medidas de
+          mitigación del impacto minero. Porque el territorio que produce
+          la riqueza debe también recibir su cuidado.
+        </p>
+      </article>
+
+      <!-- Tarjeta 2: Social -->
+      <article class="ps-card" style="--card-accent: #4a90d9;">
+        <div class="ps-card__icon" aria-hidden="true">🤝</div>
+        <div class="ps-card__pct">20%</div>
+        <h3 class="ps-card__title">Desarrollo Social Comunitario</h3>
+        <p class="ps-card__text">
+          Destinado a educación, salud y proyectos que nacen de las
+          propias comunidades. El royalty como inversión en las personas
+          que viven junto a las faenas mineras.
+        </p>
+      </article>
+
+      <!-- Tarjeta 3: Reserva -->
+      <article class="ps-card" style="--card-accent: #c8922a;">
+        <div class="ps-card__icon" aria-hidden="true">🛡️</div>
+        <div class="ps-card__pct">10%</div>
+        <h3 class="ps-card__title">Fondo de Reserva Municipal</h3>
+        <p class="ps-card__text">
+          Ahorro obligatorio para emergencias comunales. Alineado con
+          los Artículos 41 y 42 de la Constitución sobre estados de
+          excepción: que el municipio no quede sin recursos cuando más
+          los necesita.
+        </p>
+      </article>
+
+      <!-- Tarjeta 4: Libre Disposición -->
+      <article class="ps-card" style="--card-accent: #4a6080;">
+        <div class="ps-card__icon" aria-hidden="true">⚖️</div>
+        <div class="ps-card__pct">50%</div>
+        <h3 class="ps-card__title">Libre Disposición</h3>
+        <p class="ps-card__text">
+          La autonomía municipal se mantiene para la mitad de los
+          recursos. Los alcaldes siguen decidiendo según su realidad
+          local — pero con rendición de cuentas exigible.
+        </p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECCIÓN 3 — CÓMO SE GARANTIZA
+     ════════════════════════════════════════════════════════════ -->
+<section class="ps-garantia-wrap" data-sol-reveal>
+  <div class="ps-inner ps-inner--narrow">
+
+    <p class="ps-eyebrow">Los pilares de la reforma</p>
+    <h2 class="ps-title ps-title--sm">¿Cómo se hace exigible?</h2>
+    <p class="ps-bajada ps-bajada--narrow">
+      La propuesta responde de antemano a la objeción de autonomía
+      municipal: no elimina libertad, la ordena.
+    </p>
+
+    <ol class="ps-pilares" role="list">
+
+      <li class="ps-pilar">
+        <div class="ps-pilar__num" aria-hidden="true">01</div>
+        <div class="ps-pilar__content">
+          <h3 class="ps-pilar__title">Reglas claras de destino</h3>
+          <p class="ps-pilar__text">
+            La ley define los cuatro destinos y sus porcentajes mínimos.
+            No hay margen para reclasificar gastos ni vacíos de
+            interpretación.
+          </p>
+        </div>
+      </li>
+
+      <li class="ps-pilar">
+        <div class="ps-pilar__num" aria-hidden="true">02</div>
+        <div class="ps-pilar__content">
+          <h3 class="ps-pilar__title">Rendición de cuentas obligatoria</h3>
+          <p class="ps-pilar__text">
+            Cada municipio debe publicar semestralmente en qué se gastó
+            cada partida. El CPLT fiscaliza. Sin informe, no hay
+            transferencia del período siguiente.
+          </p>
+        </div>
+      </li>
+
+      <li class="ps-pilar">
+        <div class="ps-pilar__num" aria-hidden="true">03</div>
+        <div class="ps-pilar__content">
+          <h3 class="ps-pilar__title">Participación ciudadana consultiva</h3>
+          <p class="ps-pilar__text">
+            Las comunidades tienen voz en la priorización de gastos a
+            través de un mecanismo consultivo. El municipio decide, pero
+            escucha.
+          </p>
+        </div>
+      </li>
+
+    </ol>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECCIÓN 4 — DESCARGA PDF
+     ════════════════════════════════════════════════════════════ -->
+<section class="ps-pdf-wrap" data-sol-reveal>
+  <div class="ps-inner ps-inner--center">
+    <div class="ps-pdf-card">
+      <div class="ps-pdf-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <polyline points="9 15 12 18 15 15"/>
+        </svg>
+      </div>
+      <p class="ps-eyebrow ps-eyebrow--center">Documento oficial</p>
+      <h2 class="ps-pdf-title">Iniciativa Juvenil de Ley</h2>
+      <p class="ps-pdf-text">
+        Lee el texto completo de nuestra propuesta de reforma,
+        fundamentación legal y diagnóstico territorial.
+      </p>
+      <a
+        href="/ijl-terechillas.pdf"
+        class="ps-pdf-btn"
+        download
+        aria-label="Descargar la Iniciativa Juvenil de Ley en formato PDF"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        Descargar la Iniciativa Juvenil de Ley (PDF)
+      </a>
+      <p class="ps-pdf-nota">El archivo PDF estará disponible próximamente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── ESTILOS ──────────────────────────────────────────── -->
+<style>
+  /* ── Compartidos ── */
+  .ps-wrap,
+  .ps-tarjetas-wrap,
+  .ps-garantia-wrap,
+  .ps-pdf-wrap {
+    padding: 6rem 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    /* reveal: estado inicial */
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .ps-wrap,
+  .ps-pdf-wrap {
+    background-color: #1a2942;
+    background-color: var(--color-bg, #1a2942);
+  }
+  .ps-tarjetas-wrap {
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+  }
+  .ps-garantia-wrap {
+    background-color: #1e2f4a;
+    background-color: var(--color-bg-section, #1e2f4a);
+  }
+
+  /* visible */
+  [data-sol-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ps-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+  }
+  .ps-inner--narrow { max-width: 680px; }
+  .ps-inner--center { max-width: 560px; }
+
+  .ps-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+  .ps-eyebrow--center { text-align: center; }
+
+  .ps-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .ps-title--sm { font-size: clamp(1.5rem, 3.5vw, 2.2rem); }
+
+  .ps-bajada {
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.75;
+    max-width: 640px;
+  }
+  .ps-bajada--narrow { max-width: 500px; }
+
+  /* ── DONA ── */
+  .ps-dona-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .ps-dona {
+    width: min(280px, 70vw);
+    height: min(280px, 70vw);
+    overflow: visible;
+    /* animación: los segmentos parten invisibles y se revelan */
+    --dona-ready: 0;
+  }
+
+  /* Estado inicial de los segmentos: ocultos vía opacity */
+  .ps-seg {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    /* La animación de dibujo se controla desde JS */
+  }
+  .ps-dona.is-animated .ps-seg {
+    opacity: 1;
+  }
+
+  .ps-dona-label-top {
+    font-family: var(--font-sans, sans-serif);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    fill: #f0f4f8;
+    text-transform: uppercase;
+  }
+  .ps-dona-label-bot {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 11px;
+    font-style: italic;
+    fill: #c8922a;
+  }
+
+  /* Leyenda */
+  .ps-leyenda {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem 2rem;
+    text-align: left;
+  }
+  .ps-leyenda__item {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .ps-leyenda__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .ps-leyenda__pct {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    min-width: 2.5rem;
+  }
+  .ps-leyenda__name {
+    font-size: 0.82rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.3;
+  }
+
+  /* ── TARJETAS ── */
+  .ps-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ps-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-top: 3px solid var(--card-accent, #c8922a);
+    border-radius: 8px;
+    padding: 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .ps-card:hover {
+    transform: translateY(-3px);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .ps-card__icon {
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+  .ps-card__pct {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--card-accent, #c8922a);
+    line-height: 1;
+  }
+  .ps-card__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.3;
+  }
+  .ps-card__text {
+    font-size: 0.875rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.7;
+  }
+
+  /* ── PILARES ── */
+  .ps-pilares {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .ps-pilar {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    text-align: left;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ps-pilar:last-child { border-bottom: none; }
+
+  .ps-pilar__num {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    opacity: 0.5;
+    flex-shrink: 0;
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+
+  .ps-pilar__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    margin-bottom: 0.4rem;
+  }
+  .ps-pilar__text {
+    font-size: 0.9rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.75;
+  }
+
+  /* ── PDF ── */
+  .ps-pdf-card {
+    background: rgba(200,146,42,0.06);
+    border: 1px solid rgba(200,146,42,0.2);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .ps-pdf-icon {
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    opacity: 0.8;
+  }
+
+  .ps-pdf-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+  }
+
+  .ps-pdf-text {
+    font-size: 0.95rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.7;
+    max-width: 380px;
+  }
+
+  .ps-pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85em 2em;
+    background: #c8922a;
+    background: var(--color-accent, #c8922a);
+    color: #111d30;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(200,146,42,0.25);
+    margin-top: 0.25rem;
+  }
+  .ps-pdf-btn:hover {
+    background: #e0b254;
+    transform: translateY(-2px);
+    color: #111d30;
+  }
+
+  .ps-pdf-nota {
+    font-size: 0.72rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .ps-grid { grid-template-columns: 1fr; }
+    .ps-leyenda { grid-template-columns: 1fr; }
+    .ps-pilar { gap: 1rem; }
+    .ps-pilar__num { font-size: 1.4rem; min-width: 2rem; }
+    .ps-wrap, .ps-tarjetas-wrap, .ps-garantia-wrap, .ps-pdf-wrap {
+      padding: 4rem 1.25rem;
+    }
+  }
+</style>
+
+<!-- ── SCRIPT: Reveal secciones + animación dona ── -->
+<script>
+  // ── 1. Reveal de secciones ───────────────────────────────
+  const solSections = document.querySelectorAll<HTMLElement>('[data-sol-reveal]');
+
+  const solObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+
+          // Si es la sección de la dona, dispara la animación
+          const dona = entry.target.querySelector<SVGElement>('.ps-dona');
+          if (dona && !dona.classList.contains('is-animated')) {
+            animateDona(dona);
+          }
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  solSections.forEach((el) => solObserver.observe(el));
+
+  // ── 2. Animación de la dona ──────────────────────────────
+  function animateDona(dona: SVGElement) {
+    dona.classList.add('is-animated');
+
+    const segs = dona.querySelectorAll<SVGCircleElement>('.ps-seg');
+    const circumference = 502.65;
+
+    // Datos de cada segmento: porcentaje y offset de inicio (en fracción)
+    // Orden de aparición: eco → social → reserva → libre
+    const segData: { el: SVGCircleElement; pct: number; startOffset: number }[] = [
+      { el: dona.querySelector('#seg-eco')!     as SVGCircleElement, pct: 0.20, startOffset: -0.35 },
+      { el: dona.querySelector('#seg-social')!  as SVGCircleElement, pct: 0.20, startOffset: -0.55 },
+      { el: dona.querySelector('#seg-reserva')! as SVGCircleElement, pct: 0.10, startOffset: -0.75 },
+      { el: dona.querySelector('#seg-libre')!   as SVGCircleElement, pct: 0.50, startOffset: -0.25 },
+    ];
+
+    const duration = 900; // ms por segmento
+    const stagger  = 120; // ms entre segmentos
+
+    segData.forEach(({ el, pct, startOffset }, i) => {
+      if (!el) return;
+      const segLength  = pct * circumference;
+      const gapLength  = circumference - segLength;
+      const finalOffset = startOffset * circumference;
+
+      setTimeout(() => {
+        el.style.opacity = '1';
+        // Partimos con dasharray = 0 y animamos a su valor final
+        el.style.strokeDasharray = `0 ${circumference}`;
+        el.style.strokeDashoffset = String(finalOffset);
+        el.style.transition = 'none';
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            el.style.transition = `stroke-dasharray ${duration}ms cubic-bezier(0.4,0,0.2,1)`;
+            el.style.strokeDasharray = `${segLength} ${gapLength}`;
+          });
+        });
+      }, i * stagger);
+    });
+  }
+</script>

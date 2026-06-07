@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import ScrollProblema from '../components/ScrollProblema.astro';
+import PropuestaSolucion from '../components/PropuestaSolucion.astro';
 ---
 
 <Base
@@ -25,14 +26,8 @@ import ScrollProblema from '../components/ScrollProblema.astro';
   <!-- Scrollytelling del problema -->
   <ScrollProblema />
 
-  <!-- Ancla para la sección de solución (Fase 3) -->
-  <section class="prop-solucion-placeholder" id="propuesta-solucion">
-    <div class="prop-sol__inner">
-      <p class="prop-eyebrow">Próximamente</p>
-      <h2>La distribución 20 / 20 / 10 / 50</h2>
-      <p>Esta sección se desarrollará en la Fase 3.</p>
-    </div>
-  </section>
+  <!-- Distribución + tarjetas + garantías + PDF -->
+  <PropuestaSolucion />
 </Base>
 
 <style>
@@ -105,36 +100,5 @@ import ScrollProblema from '../components/ScrollProblema.astro';
     50%       { opacity: 1; }
   }
 
-  /* ── Placeholder solución ── */
-  .prop-solucion-placeholder {
-    min-height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6rem 1.5rem;
-    text-align: center;
-    background: #111d30;
-    background: var(--color-bg-dark, #111d30);
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .prop-sol__inner {
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .prop-sol__inner h2 {
-    font-family: var(--font-display, 'Georgia', serif);
-    font-size: clamp(1.6rem, 4vw, 2.5rem);
-    color: #f0f4f8;
-    color: var(--color-text, #f0f4f8);
-  }
-
-  .prop-sol__inner p {
-    color: #6b83a0;
-    color: var(--color-text-dim, #6b83a0);
-    font-size: 0.95rem;
-  }
+  /* placeholder eliminado — reemplazado por PropuestaSolucion.astro */
 </style>
