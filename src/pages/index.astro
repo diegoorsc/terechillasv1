@@ -1,0 +1,70 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Terechillas del Choapa">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="badge">⚽ Equipo Escolar</div>
+      <h1>Terechillas del Choapa</h1>
+      <p class="tagline">En construcción</p>
+      <p class="sub">Pronto encontrarás aquí noticias, calendario de partidos,<br />galería y más sobre nuestro equipo.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(200, 146, 42, 0.12) 0%, transparent 60%),
+      var(--color-bg);
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.35em 1em;
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+
+  .tagline {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--color-accent);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .sub {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+</style>

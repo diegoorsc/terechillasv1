@@ -1,0 +1,61 @@
+/* Terechillas del Choapa — Paleta de colores */
+:root {
+  /* Fondos */
+  --color-bg:          #1a2942;   /* azul marino profundo */
+  --color-bg-mid:      #223354;   /* azul medio para tarjetas/secciones */
+  --color-bg-light:    #2c4068;   /* azul más claro para hover/borders */
+
+  /* Acento */
+  --color-accent:      #c8922a;   /* dorado/cobre principal */
+  --color-accent-light:#e0b254;   /* dorado claro para hover */
+  --color-accent-dark: #a0711a;   /* dorado oscuro para sombras */
+
+  /* Texto */
+  --color-text:        #f0f4f8;   /* blanco suave, texto principal */
+  --color-text-muted:  #9dafc5;   /* gris azulado, texto secundario */
+  --color-text-dim:    #6b83a0;   /* gris más oscuro, hints */
+
+  /* Utilidades */
+  --color-white:       #ffffff;
+  --color-border:      rgba(200, 146, 42, 0.25); /* borde dorado semitransparente */
+
+  /* Tipografía */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Georgia', 'Times New Roman', serif;
+
+  /* Espaciado base */
+  --radius: 6px;
+  --radius-lg: 12px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-accent-light);
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

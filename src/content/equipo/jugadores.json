@@ -1,0 +1,6 @@
+[
+  { "nombre": "Ejemplo Jugador 1", "posicion": "Portero",    "numero": 1 },
+  { "nombre": "Ejemplo Jugador 2", "posicion": "Defensa",    "numero": 4 },
+  { "nombre": "Ejemplo Jugador 3", "posicion": "Mediocampo", "numero": 8 },
+  { "nombre": "Ejemplo Jugador 4", "posicion": "Delantero",  "numero": 9 }
+]
