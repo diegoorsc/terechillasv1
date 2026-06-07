@@ -1,40 +1,671 @@
 ---
+/*
+<!-- ============================================================
+     TEXTOS PARA REVISIÓN — territorio.astro
+     ============================================================
+
+── SECCIÓN 1: HERO ──
+  eyebrow:  "Nuestro territorio"
+  título:   "El Choapa: entre la cordillera y la sequía."
+  bajada:   "Illapel es la capital de la Provincia del Choapa, en la
+             Región de Coquimbo. Es una zona semiárida, históricamente
+             minera, donde la escasez de agua ha dejado de ser una
+             amenaza futura para convertirse en la realidad cotidiana
+             de sus comunidades."
+
+── SECCIÓN 2: MAPA ──
+  pie:      "Illapel · Provincia del Choapa · Región de Coquimbo"
+
+── SECCIÓN 3: DATOS DE SEQUÍA ──
+  tarjeta 1: "32 mil" — "habitantes de Illapel, capital provincial."
+             Fuente: INE, Censo 2017.
+  tarjeta 2: "83,2%" — "déficit de precipitaciones registrado en
+             Illapel durante julio de 2023."
+             Fuente: Aguas del Valle, julio 2023.
+  tarjeta 3: "6,8%" — "capacidad a la que se redujo el embalse El
+             Bato, que abastece a la ciudad, en julio de 2023."
+             Fuente: Aguas del Valle, julio 2023.
+  tarjeta 4: "3–4 años" — "de lluvias normales consecutivas necesarios
+             para recuperar los caudales y el agua subterránea."
+             Fuente: Estimaciones técnicas DGA / literatura hidrológica.
+
+── SECCIÓN 4: DECRETO DE ESCASEZ ──
+  eyebrow:  "Una crisis reconocida por el Estado"
+  título:   "Una sequía que ya tiene nombre legal."
+  párrafo 1: "La Provincia del Choapa está bajo Decreto de Escasez
+              Hídrica desde el 26 de julio de 2024 (Decreto Supremo
+              N.° 94). Este instrumento legal permite a la autoridad
+              adoptar medidas excepcionales de redistribución del agua
+              disponible cuando la situación de escasez es grave y
+              persistente."
+  párrafo 2: "Para quienes vivimos aquí, el decreto no es una
+              abstracción jurídica: es la confirmación oficial de
+              algo que las familias del Choapa llevan años viendo en
+              sus pozos secos, en las acequias sin agua y en los
+              animales que no tienen qué beber. La sequía es nuestro
+              contexto permanente, no un evento puntual."
+
+── SECCIÓN 5: MINERÍA ──
+  eyebrow:  "Minería y territorio"
+  título:   "Una tierra que produce riqueza y vive la escasez."
+  párrafo 1: "La Provincia del Choapa es zona minera histórica. En
+              sus cerros y quebradas se extraen cobre y otros
+              minerales que alimentan exportaciones que el país
+              celebra en cifras macroeconómicas. La minera Los
+              Pelambres, en la cuenca alta del río Choapa, es una
+              de las más grandes de Chile."
+  párrafo 2: "Esa convivencia entre industria extractiva y escasez
+              de agua no es casual: la minería es una actividad de
+              alto consumo hídrico en un territorio que ya no tiene
+              agua que sobrar. Es desde esa contradicción real y
+              cotidiana que nace nuestra pregunta sobre el royalty:
+              ¿quién se queda con el beneficio y quién carga con
+              el costo?"
+
+     ============================================================ -->
+*/
+
 import Base from '../layouts/Base.astro';
+
+const datosSequia = [
+  {
+    valor: '32 mil',
+    descripcion: 'habitantes de Illapel, capital de la Provincia del Choapa.',
+    fuente: 'INE · Censo 2017',
+  },
+  {
+    valor: '83,2%',
+    descripcion: 'déficit de precipitaciones registrado en Illapel durante julio de 2023.',
+    fuente: 'Aguas del Valle · julio 2023',
+  },
+  {
+    valor: '6,8%',
+    descripcion: 'capacidad a la que se redujo el embalse El Bato, que abastece la ciudad, en julio de 2023.',
+    fuente: 'Aguas del Valle · julio 2023',
+  },
+  {
+    valor: '3–4 años',
+    descripcion: 'de lluvias normales consecutivas necesarios para recuperar los caudales y el agua subterránea.',
+    fuente: 'Estimaciones técnicas DGA',
+  },
+];
 ---
 
-<Base title="Territorio" description="El Choapa: territorio, minería y sequía.">
-  <section class="placeholder">
-    <div class="placeholder-inner">
-      <div class="eyebrow">Nuestro contexto</div>
-      <h1>El Territorio</h1>
-      <p>Contenido en desarrollo.</p>
+<Base
+  title="Territorio"
+  description="Illapel, Provincia del Choapa: zona semiárida, minera y bajo decreto de escasez hídrica. El territorio que da sentido a nuestra propuesta."
+>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 1 — HERO
+       ══════════════════════════════════════════════════════ -->
+  <section class="tr-hero">
+    <div class="tr-hero__inner">
+      <p class="tr-eyebrow">Nuestro territorio</p>
+      <h1 class="tr-title">
+        El Choapa: entre la cordillera y la&nbsp;sequía.
+      </h1>
+      <p class="tr-bajada">
+        Illapel es la capital de la Provincia del Choapa, en la Región
+        de Coquimbo. Es una zona semiárida, históricamente minera, donde
+        la escasez de agua ha dejado de ser una amenaza futura para
+        convertirse en la realidad cotidiana de sus comunidades.
+      </p>
     </div>
   </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 2 — MAPA
+       ══════════════════════════════════════════════════════ -->
+  <section class="tr-mapa">
+    <div class="tr-mapa__inner">
+
+      <!-- SVG esquemático de Chile con punto en Illapel -->
+      <!-- Alternativa liviana que no requiere carga externa -->
+      <div class="tr-mapa__svg-wrap" aria-label="Mapa de Chile con ubicación de Illapel">
+        <svg
+          viewBox="0 0 120 500"
+          xmlns="http://www.w3.org/2000/svg"
+          class="tr-chile-svg"
+          role="img"
+          aria-labelledby="mapa-title"
+        >
+          <title id="mapa-title">Contorno de Chile con punto en Illapel, Provincia del Choapa</title>
+
+          <!-- Contorno simplificado de Chile continental (norte→sur) -->
+          <path
+            class="tr-chile-path"
+            d="
+              M 68,10  L 72,12  L 78,16  L 80,22  L 76,28
+              L 74,34  L 72,42  L 70,50  L 68,58  L 66,66
+              L 63,74  L 61,82  L 60,90  L 59,98  L 58,108
+              L 57,118 L 57,128 L 58,138 L 59,148 L 58,158
+              L 56,168 L 54,178 L 52,188 L 50,198 L 49,210
+              L 48,222 L 47,234 L 46,246 L 45,258 L 44,270
+              L 43,282 L 42,294 L 41,306 L 40,318 L 38,330
+              L 36,342 L 34,354 L 32,366 L 30,378 L 28,390
+              L 26,402 L 24,412 L 22,420 L 20,430 L 22,438
+              L 26,442 L 30,444 L 34,442 L 38,440 L 42,438
+              L 46,436 L 48,432
+              M 26,442 L 18,448 L 14,454 L 12,460 L 10,468
+              L 12,476 L 16,482 L 20,486 L 24,490
+            "
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+
+          <!-- Región de Coquimbo aproximada (entre y=118 y y=168) — resaltada -->
+          <rect
+            x="50" y="118" width="22" height="45"
+            fill="rgba(200,146,42,0.12)"
+            stroke="rgba(200,146,42,0.3)"
+            stroke-width="0.6"
+            rx="2"
+          />
+
+          <!-- Punto Illapel: latitud -31.63 → aprox y=148 en nuestro SVG -->
+          <circle class="tr-punto-ring" cx="61" cy="148" r="8" />
+          <circle class="tr-punto" cx="61" cy="148" r="4" />
+
+          <!-- Etiqueta -->
+          <text x="72" y="145" class="tr-mapa-label">Illapel</text>
+          <text x="72" y="154" class="tr-mapa-sublabel">Choapa · Coquimbo</text>
+        </svg>
+      </div>
+
+      <!-- Mapa OSM embebido como opción detallada -->
+      <div class="tr-mapa__osm-wrap">
+        <iframe
+          title="Mapa de Illapel en OpenStreetMap"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-71.3%2C-31.75%2C-71.0%2C-31.50&amp;layer=mapnik&amp;marker=-31.633%2C-71.166"
+          loading="lazy"
+          allowfullscreen
+          class="tr-osm"
+        ></iframe>
+        <p class="tr-mapa__pie">
+          Illapel · Provincia del Choapa · Región de Coquimbo
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 3 — DATOS DE SEQUÍA
+       ══════════════════════════════════════════════════════ -->
+  <section class="tr-datos" data-tr-reveal>
+    <div class="tr-datos__inner">
+      <p class="tr-eyebrow">El diagnóstico</p>
+      <h2 class="tr-section-title">La sequía en números.</h2>
+
+      <ul class="tr-datos__grid" role="list">
+        {datosSequia.map((d) => (
+          <li class="tr-dato-card">
+            <p class="tr-dato-card__valor">{d.valor}</p>
+            <p class="tr-dato-card__desc">{d.descripcion}</p>
+            <p class="tr-dato-card__fuente">{d.fuente}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 4 — DECRETO DE ESCASEZ
+       ══════════════════════════════════════════════════════ -->
+  <section class="tr-narrativa tr-narrativa--decreto" data-tr-reveal>
+    <div class="tr-narrativa__inner">
+      <div class="tr-narrativa__texto">
+        <p class="tr-eyebrow">Una crisis reconocida por el Estado</p>
+        <h2 class="tr-section-title">Una sequía que ya tiene nombre legal.</h2>
+        <p class="tr-narrativa__parrafo">
+          La Provincia del Choapa está bajo Decreto de Escasez Hídrica
+          desde el 26 de julio de 2024 (Decreto Supremo N.°&nbsp;94). Este
+          instrumento legal permite a la autoridad adoptar medidas
+          excepcionales de redistribución del agua disponible cuando la
+          situación de escasez es grave y persistente.
+        </p>
+        <p class="tr-narrativa__parrafo">
+          Para quienes vivimos aquí, el decreto no es una abstracción
+          jurídica: es la confirmación oficial de algo que las familias del
+          Choapa llevan años viendo en sus pozos secos, en las acequias sin
+          agua y en los animales que no tienen qué beber. La sequía es
+          nuestro contexto permanente, no un evento puntual.
+        </p>
+        <div class="tr-decreto-badge">
+          <span class="tr-decreto-badge__label">Decreto Supremo</span>
+          <span class="tr-decreto-badge__num">N.° 94</span>
+          <span class="tr-decreto-badge__fecha">26 julio 2024</span>
+        </div>
+      </div>
+
+      <!-- Icono decorativo agua -->
+      <div class="tr-narrativa__icono" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+          <path
+            d="M32 8 C32 8 12 28 12 40 a20 20 0 0 0 40 0 C52 28 32 8 32 8Z"
+            stroke="currentColor" stroke-width="2.5"
+            stroke-linejoin="round" fill="rgba(200,146,42,0.07)"
+          />
+          <path
+            d="M22 44 a12 12 0 0 0 12 8"
+            stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" opacity="0.5"
+          />
+          <!-- Líneas de "nivel bajo" -->
+          <line x1="20" y1="50" x2="44" y2="50" stroke="currentColor"
+                stroke-width="1" stroke-dasharray="3 3" opacity="0.3"/>
+          <line x1="20" y1="44" x2="44" y2="44" stroke="currentColor"
+                stroke-width="1" stroke-dasharray="3 3" opacity="0.2"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════
+       SECCIÓN 5 — MINERÍA
+       ══════════════════════════════════════════════════════ -->
+  <section class="tr-narrativa tr-narrativa--mineria" data-tr-reveal>
+    <div class="tr-narrativa__inner tr-narrativa__inner--rev">
+      <!-- Icono decorativo montaña/mina -->
+      <div class="tr-narrativa__icono" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+          <polygon
+            points="32,8 6,52 58,52"
+            stroke="currentColor" stroke-width="2.5"
+            stroke-linejoin="round" fill="rgba(200,146,42,0.07)"
+          />
+          <polygon
+            points="32,20 20,40 44,40"
+            stroke="currentColor" stroke-width="1.5"
+            stroke-linejoin="round" fill="rgba(200,146,42,0.04)"
+            opacity="0.6"
+          />
+          <!-- Pico de excavación simbólico -->
+          <line x1="32" y1="52" x2="32" y2="58" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"/>
+          <line x1="26" y1="58" x2="38" y2="58" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div class="tr-narrativa__texto">
+        <p class="tr-eyebrow">Minería y territorio</p>
+        <h2 class="tr-section-title">Una tierra que produce riqueza y vive la escasez.</h2>
+        <p class="tr-narrativa__parrafo">
+          La Provincia del Choapa es zona minera histórica. En sus cerros
+          y quebradas se extraen cobre y otros minerales que alimentan
+          exportaciones que el país celebra en cifras macroeconómicas.
+          La minera Los Pelambres, en la cuenca alta del río Choapa, es
+          una de las más grandes de Chile.
+        </p>
+        <p class="tr-narrativa__parrafo">
+          Esa convivencia entre industria extractiva y escasez de agua no
+          es casual: la minería es una actividad de alto consumo hídrico
+          en un territorio que ya no tiene agua que sobrar. Es desde esa
+          contradicción real y cotidiana que nace nuestra pregunta sobre
+          el royalty: ¿quién se queda con el beneficio y quién carga con
+          el costo?
+        </p>
+      </div>
+    </div>
+  </section>
+
 </Base>
 
 <style>
-  .placeholder {
-    min-height: 100vh;
+  /* ══ Compartidos ══ */
+  .tr-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+
+  .tr-section-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  /* reveal on scroll */
+  [data-tr-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  [data-tr-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ══ HERO ══ */
+  .tr-hero {
+    padding: calc(var(--nav-height, 64px) + 4rem) 1.5rem 5rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%,
+        rgba(200,146,42,0.09) 0%, transparent 65%),
+      #1a2942;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%,
+        rgba(200,146,42,0.09) 0%, transparent 65%),
+      var(--color-bg, #1a2942);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .tr-hero__inner {
+    max-width: 660px;
+    margin: 0 auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    gap: 1.3rem;
+  }
+
+  .tr-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(2rem, 5.5vw, 3.4rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  .tr-bajada {
+    font-size: clamp(0.95rem, 1.9vw, 1.1rem);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  /* ══ MAPA ══ */
+  .tr-mapa {
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 4rem 1.5rem;
+  }
+
+  .tr-mapa__inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  /* SVG de Chile */
+  .tr-mapa__svg-wrap {
+    display: flex;
     justify-content: center;
-    padding: calc(var(--nav-height) + 2rem) 1.5rem 4rem;
+  }
+
+  .tr-chile-svg {
+    width: 130px;
+    height: auto;
+    filter: drop-shadow(0 0 16px rgba(200,146,42,0.15));
+  }
+
+  .tr-chile-path {
+    stroke: rgba(255,255,255,0.25);
+    stroke-width: 2.5;
+  }
+
+  .tr-punto {
+    fill: #c8922a;
+    fill: var(--color-accent, #c8922a);
+  }
+
+  .tr-punto-ring {
+    fill: rgba(200,146,42,0.15);
+    animation: pulse-ring 2.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { r: 7; opacity: 0.5; }
+    50%       { r: 11; opacity: 0.15; }
+  }
+
+  .tr-mapa-label {
+    font-size: 8px;
+    font-weight: 700;
+    fill: #f0f4f8;
+    letter-spacing: 0.06em;
+  }
+
+  .tr-mapa-sublabel {
+    font-size: 6px;
+    fill: #9dafc5;
+    letter-spacing: 0.04em;
+  }
+
+  /* OpenStreetMap iframe */
+  .tr-mapa__osm-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .tr-osm {
+    width: 100%;
+    height: 320px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    display: block;
+    /* OSM tiene fondo blanco; lo integramos con un borde sutil */
+    filter: saturate(0.85) brightness(0.92);
+  }
+
+  .tr-mapa__pie {
+    font-size: 0.75rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    letter-spacing: 0.06em;
     text-align: center;
   }
-  .placeholder-inner { max-width: 600px; }
-  .eyebrow {
-    font-size: 0.72rem;
-    font-weight: 600;
+
+  @media (max-width: 660px) {
+    .tr-mapa__inner {
+      grid-template-columns: 1fr;
+    }
+    .tr-mapa__svg-wrap { display: none; } /* ocultar en móvil, solo OSM */
+  }
+
+  /* ══ DATOS DE SEQUÍA ══ */
+  .tr-datos {
+    padding: 5rem 1.5rem;
+    background-color: #1a2942;
+    background-color: var(--color-bg, #1a2942);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .tr-datos__inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .tr-datos__grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .tr-dato-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-top: 2px solid rgba(200,146,42,0.4);
+    border-radius: 10px;
+    padding: 1.75rem 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    text-align: center;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .tr-dato-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255,255,255,0.07);
+  }
+
+  .tr-dato-card__valor {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.9rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .tr-dato-card__desc {
+    font-size: 0.875rem;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.55;
+  }
+
+  .tr-dato-card__fuente {
+    font-size: 0.68rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    letter-spacing: 0.04em;
+    margin-top: auto;
+  }
+
+  @media (max-width: 760px) {
+    .tr-datos__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 440px) {
+    .tr-datos__grid { grid-template-columns: 1fr; max-width: 320px; }
+  }
+
+  /* ══ BLOQUES NARRATIVOS ══ */
+  .tr-narrativa {
+    padding: 5rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .tr-narrativa--decreto {
+    background-color: #1e2f4a;
+    background-color: var(--color-bg-section, #1e2f4a);
+  }
+  .tr-narrativa--mineria {
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+  }
+
+  .tr-narrativa__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .tr-narrativa__inner--rev {
+    grid-template-columns: 100px 1fr;
+  }
+
+  .tr-narrativa__texto {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .tr-narrativa__parrafo {
+    font-size: clamp(0.93rem, 1.7vw, 1.05rem);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.8;
+  }
+
+  /* Icono decorativo */
+  .tr-narrativa__icono {
+    width: 80px;
+    height: 80px;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+    opacity: 0.7;
+  }
+  .tr-narrativa__icono svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Badge decreto */
+  .tr-decreto-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    background: rgba(200,146,42,0.07);
+    border: 1px solid rgba(200,146,42,0.25);
+    border-radius: 8px;
+    width: fit-content;
+  }
+  .tr-decreto-badge__label {
+    font-size: 0.67rem;
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: 1rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
   }
-  h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--color-text);
-    margin-bottom: 1rem;
+  .tr-decreto-badge__num {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
   }
-  p { color: var(--color-text-muted); }
+  .tr-decreto-badge__fecha {
+    font-size: 0.75rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 640px) {
+    .tr-narrativa__inner,
+    .tr-narrativa__inner--rev {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+    .tr-narrativa__icono { width: 56px; height: 56px; }
+    .tr-decreto-badge { flex-wrap: wrap; gap: 0.4rem; }
+  }
 </style>
+
+<script>
+  // Reveal on scroll — mismo patrón que el resto del sitio
+  const trSections = document.querySelectorAll<HTMLElement>('[data-tr-reveal]');
+  const trObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add('is-visible');
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  trSections.forEach((el) => trObserver.observe(el));
+</script>
