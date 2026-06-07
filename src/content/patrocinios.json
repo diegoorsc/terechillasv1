@@ -1,22 +1,26 @@
 [
   {
-    "nombre": "[Nombre Alcalde/esa]",
-    "cargo": "Alcalde/esa de Illapel"
+    "nombre": "Paulina Vodanovic Rojas",
+    "cargo": "Senadora"
   },
   {
-    "nombre": "[Nombre Senador/a]",
-    "cargo": "Senador/a, Región de Coquimbo"
+    "nombre": "Pedro Araya",
+    "cargo": "Senador"
   },
   {
-    "nombre": "[Nombre Diputado/a]",
-    "cargo": "Diputado/a, Distrito N.° 7"
+    "nombre": "Nathalie Castillo",
+    "cargo": "Diputada"
   },
   {
-    "nombre": "[Nombre Concejal/a]",
-    "cargo": "Concejal/a de Illapel"
+    "nombre": "Marco Antonio Sulantay",
+    "cargo": "Diputado"
   },
   {
-    "nombre": "[Nombre Dirigente/a]",
-    "cargo": "Dirigente Comunitario/a, Provincia del Choapa"
+    "nombre": "Denis Cortés Aguilera",
+    "cargo": "Alcalde de Illapel"
+  },
+  {
+    "nombre": "Maximiliano Bravo",
+    "cargo": "Concejal de Illapel"
   }
 ]

@@ -362,17 +362,22 @@ const videoUrl = "";
     letter-spacing: -0.02em;
   }
 
-  /* Wrapper 16:9 responsivo */
+  /* Wrapper 16:9 responsivo.
+     Cuando el hijo es position:absolute el padre puede colapsar a 0
+     aunque tenga aspect-ratio. El min-height es el seguro de visibilidad. */
   .video-frame-wrap {
     width: 100%;
     position: relative;
     aspect-ratio: 16 / 9;
+    min-height: 220px;          /* fallback para aspect-ratio */
     border-radius: 10px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #1a2942;        /* fondo mientras carga */
+    background: var(--color-bg, #1a2942);
   }
 
-  /* iframe del video real */
+  /* iframe del video real — absoluto para llenar el wrapper 16:9 */
   .video-iframe {
     position: absolute;
     inset: 0;
@@ -381,17 +386,17 @@ const videoUrl = "";
     border: none;
   }
 
-  /* Placeholder */
+  /* Placeholder — en flujo normal para que el wrapper tenga altura.
+     width+min-height garantizan visibilidad independiente de aspect-ratio. */
   .video-placeholder {
-    position: absolute;
-    inset: 0;
+    width: 100%;
+    min-height: clamp(220px, 44vw, 450px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background: #1a2942;
-    background: var(--color-bg, #1a2942);
+    padding: 2.5rem 1rem;
     color: #c8922a;
     color: var(--color-accent, #c8922a);
   }
