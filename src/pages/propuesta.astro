@@ -1,40 +1,140 @@
 ---
 import Base from '../layouts/Base.astro';
+import ScrollProblema from '../components/ScrollProblema.astro';
 ---
 
-<Base title="Propuesta" description="Nuestra propuesta legislativa sobre el royalty minero.">
-  <section class="placeholder">
-    <div class="placeholder-inner">
-      <div class="eyebrow">Propuesta legislativa</div>
-      <h1>La Propuesta</h1>
-      <p>Contenido en desarrollo.</p>
+<Base
+  title="Propuesta"
+  description="Nuestra propuesta de reforma a la Ley N.° 21.591 para un uso socioambiental del royalty minero."
+>
+  <!-- Encabezado de la página -->
+  <section class="prop-header">
+    <div class="prop-header__inner">
+      <p class="prop-eyebrow">Propuesta legislativa · Torneo Delibera 2026</p>
+      <h1 class="prop-title">La Propuesta</h1>
+      <p class="prop-sub">
+        Antes de presentar nuestra solución, te mostramos el problema
+        que la origina. Desplázate hacia abajo.
+      </p>
+      <div class="prop-scroll-hint" aria-hidden="true">
+        <span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scrollytelling del problema -->
+  <ScrollProblema />
+
+  <!-- Ancla para la sección de solución (Fase 3) -->
+  <section class="prop-solucion-placeholder" id="propuesta-solucion">
+    <div class="prop-sol__inner">
+      <p class="prop-eyebrow">Próximamente</p>
+      <h2>La distribución 20 / 20 / 10 / 50</h2>
+      <p>Esta sección se desarrollará en la Fase 3.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .placeholder {
-    min-height: 100vh;
+  /* ── Encabezado ── */
+  .prop-header {
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: calc(var(--nav-height, 64px) + 4rem) 1.5rem 5rem;
+    text-align: center;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,146,42,0.09) 0%, transparent 65%),
+      #1a2942;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgba(200,146,42,0.09) 0%, transparent 65%),
+      var(--color-bg, #1a2942);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .prop-header__inner {
+    max-width: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+  }
+
+  .prop-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+
+  .prop-title {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .prop-sub {
+    font-size: 1rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.7;
+    max-width: 480px;
+  }
+
+  /* Indicador de scroll */
+  .prop-scroll-hint {
+    margin-top: 0.5rem;
+  }
+  .prop-scroll-hint span {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(200,146,42,0.5), transparent);
+    margin: 0 auto;
+    animation: hint-pulse 2s ease-in-out infinite;
+  }
+  @keyframes hint-pulse {
+    0%, 100% { opacity: 0.3; }
+    50%       { opacity: 1; }
+  }
+
+  /* ── Placeholder solución ── */
+  .prop-solucion-placeholder {
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(var(--nav-height) + 2rem) 1.5rem 4rem;
+    padding: 6rem 1.5rem;
     text-align: center;
+    background: #111d30;
+    background: var(--color-bg-dark, #111d30);
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  .placeholder-inner { max-width: 600px; }
-  .eyebrow {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin-bottom: 1rem;
+
+  .prop-sol__inner {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
-  h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    color: var(--color-text);
-    margin-bottom: 1rem;
+
+  .prop-sol__inner h2 {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
   }
-  p { color: var(--color-text-muted); }
+
+  .prop-sol__inner p {
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    font-size: 0.95rem;
+  }
 </style>

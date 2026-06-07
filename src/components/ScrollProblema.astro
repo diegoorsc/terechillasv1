@@ -1,0 +1,596 @@
+---
+/*
+<!-- ============================================================
+     TEXTOS PARA REVISIÓN — ScrollProblema.astro
+     Todos los textos del scrollytelling. Aprueba o ajusta
+     antes de dar por finales.
+     ============================================================
+
+BLOQUE 1 — APERTURA (tono esperanzador)
+  eyebrow:  "El punto de partida"
+  título:   "El royalty minero nació para devolverle algo al país."
+  párrafo:  "En 2023, Chile aprobó la Ley N.° 21.591, que obliga a las grandes
+             empresas mineras a pagar un royalty sobre sus ventas. Parte de ese
+             dinero se reparte directamente a los municipios del país: es la
+             primera vez que la ley garantiza que las ganancias de la minería
+             lleguen a las comunas donde viven las personas."
+
+BLOQUE 2 — EL GIRO (el problema empieza)
+  eyebrow:  "El problema"
+  título:   "Pero la mitad de ese dinero no tiene destino obligatorio."
+  párrafo:  "La ley divide los fondos municipales en dos partes. El 50% debe
+             destinarse a inversión en infraestructura. El otro 50% es de
+             'libre disposición': la ley no exige en qué gastarlo, ni obliga
+             a rendir cuentas detalladas. Sin un destino claro, ese dinero
+             puede desviarse de las necesidades reales de cada comunidad."
+  [PANEL TÉCNICO]
+  fuente:   "Artículo 8°, Ley N.° 21.591 (Royalty Minero), publicada en el
+             Diario Oficial el 31 de julio de 2023. El fondo de distribución
+             municipal contempla un 50% de inversión local y un 50% de libre
+             disposición. No existe reglamento que detalle usos priorizados
+             para esta segunda parte."
+
+BLOQUE 3 — EL DATO ANCLA (clímax visual, número animado)
+  eyebrow:  "El diagnóstico"
+  número:   61  ← anima de 0 → 61 al entrar en viewport
+  unidad:   "%"
+  bajada:   "de los municipios de Chile no cumple plenamente con sus
+             obligaciones de transparencia activa."
+  fuente:   "Fuente: Consejo para la Transparencia (CPLT), Informe de
+             Fiscalización de Transparencia Activa 2023."
+  [PANEL TÉCNICO]
+  detalle:  "El CPLT fiscalizó 345 municipios en 2023. El 61% (211 comunas)
+             registró incumplimientos en al menos una de las categorías de
+             transparencia activa obligatoria (Ley N.° 20.285). Esto incluye
+             falta de publicación de contratos, presupuestos y actos
+             administrativos. En municipios pequeños y rurales —como los del
+             Choapa— la tasa de incumplimiento es aún mayor."
+
+BLOQUE 4 — EL PROBLEMA CONCRETO (con texto para ajustar)
+  eyebrow:  "El efecto concreto"
+  título:   "Sin reglas claras, el dinero se aleja de lo importante."
+  párrafo:  "Se han documentado casos en que fondos de libre disposición
+             municipal —incluyendo recursos del royalty— se destinaron a
+             gastos de representación, eventos o contrataciones que no
+             respondían a las necesidades prioritarias de las comunidades.
+             En territorios como el Choapa, donde el agua escasea y la
+             infraestructura educacional necesita inversión, cada peso mal
+             gastado tiene un costo real para familias reales."
+  nota:     [AJUSTAR con ejemplos verificables antes de la presentación.
+             Opciones: caso Salamanca, caso Illapel, informe CGR.
+             Reemplazar el párrafo genérico por datos concretos si se
+             consiguen antes del torneo.]
+  [PANEL TÉCNICO]
+  fuente:   "Contraloría General de la República (CGR), Dictamen N.° [por
+             completar]. También: Biblioteca del Congreso Nacional, análisis
+             de la Ley N.° 21.591. Se recomienda añadir al menos un caso
+             verificado con número de expediente antes de la presentación."
+
+BLOQUE 5 — CIERRE / PUENTE A LA SOLUCIÓN
+  eyebrow:  "Nuestra respuesta"
+  título:   "Por eso proponemos que cada peso tenga un destino claro."
+  párrafo:  "Nuestra reforma modifica la Ley N.° 21.591 para que el 50%
+             de libre disposición pase a tener cuatro destinos exigibles:
+             medio ambiente, comunidades, educación y obras de inversión.
+             Con reglas claras, rindición de cuentas y participación
+             ciudadana. Así el royalty deja de ser una promesa y se
+             convierte en una garantía."
+  cta-label: "Ver la propuesta completa ↓"
+
+     ============================================================ -->
+*/
+---
+
+<section class="sp-wrap" id="scroll-problema" aria-label="El problema del royalty">
+
+  <!-- ── BLOQUE 1: APERTURA ─────────────────────────────── -->
+  <div class="sp-block sp-block--open" data-reveal>
+    <div class="sp-block__inner">
+      <p class="sp-eyebrow">El punto de partida</p>
+      <h2 class="sp-heading">
+        El royalty minero nació para devolverle algo al&nbsp;país.
+      </h2>
+      <p class="sp-body">
+        En 2023, Chile aprobó la Ley N.° 21.591, que obliga a las grandes
+        empresas mineras a pagar un royalty sobre sus ventas. Parte de ese
+        dinero se reparte directamente a los municipios del país: es la
+        primera vez que la ley garantiza que las ganancias de la minería
+        lleguen a las comunas donde viven las personas.
+      </p>
+      <div class="sp-divider" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- ── BLOQUE 2: EL GIRO ──────────────────────────────── -->
+  <div class="sp-block sp-block--giro" data-reveal>
+    <div class="sp-block__inner">
+      <p class="sp-eyebrow sp-eyebrow--warn">El problema</p>
+      <h2 class="sp-heading">
+        Pero la mitad de ese dinero no tiene destino&nbsp;obligatorio.
+      </h2>
+      <p class="sp-body">
+        La ley divide los fondos municipales en dos partes. El 50% debe
+        destinarse a inversión en infraestructura. El otro 50% es de
+        <em>"libre disposición"</em>: la ley no exige en qué gastarlo,
+        ni obliga a rendir cuentas detalladas. Sin un destino claro, ese
+        dinero puede desviarse de las necesidades reales de cada comunidad.
+      </p>
+
+      <button class="sp-toggle" aria-expanded="false" data-toggle>
+        Ver dato técnico <span class="sp-toggle__arrow" aria-hidden="true">↓</span>
+      </button>
+      <div class="sp-panel" aria-hidden="true" hidden>
+        <p class="sp-panel__label">Referencia legal</p>
+        <p>
+          Artículo 8°, Ley N.° 21.591 (Royalty Minero), publicada en el
+          Diario Oficial el 31 de julio de 2023. El fondo de distribución
+          municipal contempla un 50% de inversión local y un 50% de libre
+          disposición. No existe reglamento que detalle usos priorizados
+          para esta segunda parte.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BLOQUE 3: EL DATO ANCLA ───────────────────────── -->
+  <div class="sp-block sp-block--dato" data-reveal>
+    <div class="sp-block__inner sp-block__inner--dato">
+      <p class="sp-eyebrow sp-eyebrow--center">El diagnóstico</p>
+
+      <div class="sp-numero-wrap" aria-label="61 por ciento">
+        <span
+          class="sp-numero"
+          id="sp-counter"
+          data-target="61"
+          aria-hidden="true"
+        >0</span><span class="sp-numero__pct" aria-hidden="true">%</span>
+      </div>
+
+      <p class="sp-bajada">
+        de los municipios de Chile no cumple plenamente con sus
+        obligaciones de transparencia activa.
+      </p>
+      <p class="sp-fuente">
+        Fuente: Consejo para la Transparencia (CPLT),
+        Informe de Fiscalización de Transparencia Activa 2023.
+      </p>
+
+      <button class="sp-toggle sp-toggle--center" aria-expanded="false" data-toggle>
+        Ver dato técnico <span class="sp-toggle__arrow" aria-hidden="true">↓</span>
+      </button>
+      <div class="sp-panel sp-panel--center" aria-hidden="true" hidden>
+        <p class="sp-panel__label">Detalle del dato</p>
+        <p>
+          El CPLT fiscalizó 345 municipios en 2023. El 61% (211 comunas)
+          registró incumplimientos en al menos una categoría de
+          transparencia activa obligatoria (Ley N.° 20.285). Esto incluye
+          falta de publicación de contratos, presupuestos y actos
+          administrativos. En municipios pequeños y rurales —como los del
+          Choapa— la tasa de incumplimiento es aún mayor.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BLOQUE 4: EL PROBLEMA CONCRETO ────────────────── -->
+  <div class="sp-block sp-block--concreto" data-reveal>
+    <div class="sp-block__inner">
+      <p class="sp-eyebrow sp-eyebrow--warn">El efecto concreto</p>
+      <h2 class="sp-heading">
+        Sin reglas claras, el dinero se aleja de lo&nbsp;importante.
+      </h2>
+      <p class="sp-body">
+        Se han documentado casos en que fondos de libre disposición
+        municipal —incluyendo recursos del royalty— se destinaron a
+        gastos de representación, eventos o contrataciones que no
+        respondían a las necesidades prioritarias de las comunidades.
+        En territorios como el Choapa, donde el agua escasea y la
+        infraestructura educacional necesita inversión, cada peso mal
+        gastado tiene un costo real para familias reales.
+      </p>
+      <!-- NOTA: ajustar con casos verificables antes de la presentación -->
+
+      <button class="sp-toggle" aria-expanded="false" data-toggle>
+        Ver dato técnico <span class="sp-toggle__arrow" aria-hidden="true">↓</span>
+      </button>
+      <div class="sp-panel" aria-hidden="true" hidden>
+        <p class="sp-panel__label">Fuentes y referencias</p>
+        <p>
+          Contraloría General de la República (CGR): dictámenes sobre uso
+          de fondos municipales de libre disposición. Biblioteca del
+          Congreso Nacional, análisis de la Ley N.° 21.591.
+          <strong>
+            [Pendiente: añadir al menos un caso verificado con número de
+            expediente antes de la presentación.]
+          </strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BLOQUE 5: CIERRE / PUENTE ─────────────────────── -->
+  <div class="sp-block sp-block--cierre" data-reveal>
+    <div class="sp-block__inner sp-block__inner--cierre">
+      <p class="sp-eyebrow sp-eyebrow--center">Nuestra respuesta</p>
+      <h2 class="sp-heading sp-heading--cierre">
+        Por eso proponemos que cada peso tenga un destino&nbsp;claro.
+      </h2>
+      <p class="sp-body sp-body--center">
+        Nuestra reforma modifica la Ley N.° 21.591 para que el 50%
+        de libre disposición pase a tener cuatro destinos exigibles:
+        medio ambiente, comunidades, educación y obras de inversión.
+        Con reglas claras, rendición de cuentas y participación
+        ciudadana. Así el royalty deja de ser una promesa y se
+        convierte en una garantía.
+      </p>
+      <a href="#propuesta-solucion" class="sp-cta">
+        Ver la propuesta completa
+        <span class="sp-cta__arrow" aria-hidden="true">↓</span>
+      </a>
+
+      <!-- Indicador de scroll -->
+      <div class="sp-scroll-hint" aria-hidden="true">
+        <span class="sp-scroll-hint__line"></span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── ESTILOS ──────────────────────────────────────────── -->
+<style>
+  /* Wrapper general */
+  .sp-wrap {
+    background-color: #1a2942;
+    background-color: var(--color-bg, #1a2942);
+    width: 100%;
+  }
+
+  /* ── Bloque base ── */
+  .sp-block {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    /* Estado inicial: invisible, desplazado hacia abajo */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+
+  /* Estado visible (clase añadida por IntersectionObserver) */
+  .sp-block.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .sp-block__inner {
+    max-width: 720px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* ── Eyebrow ── */
+  .sp-eyebrow {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+  }
+  .sp-eyebrow--warn {
+    color: #e8a84a;
+  }
+  .sp-eyebrow--center {
+    text-align: center;
+  }
+
+  /* ── Titular ── */
+  .sp-heading {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(1.8rem, 4.5vw, 3rem);
+    font-weight: 700;
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── Párrafo cuerpo ── */
+  .sp-body {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+  .sp-body em {
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    font-style: italic;
+  }
+  .sp-body--center { text-align: center; align-self: center; }
+
+  /* ── Divisor decorativo ── */
+  .sp-divider {
+    width: 48px;
+    height: 2px;
+    background: #c8922a;
+    background: var(--color-accent, #c8922a);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+  }
+
+  /* ── Toggle "Ver dato técnico" ── */
+  .sp-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: 1px solid rgba(200,146,42,0.3);
+    border-radius: 999px;
+    padding: 0.4em 1em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    align-self: flex-start;
+  }
+  .sp-toggle--center { align-self: center; }
+  .sp-toggle:hover {
+    border-color: #c8922a;
+    background: rgba(200,146,42,0.06);
+  }
+  .sp-toggle[aria-expanded="true"] .sp-toggle__arrow {
+    display: inline-block;
+    transform: rotate(180deg);
+  }
+  .sp-toggle__arrow {
+    transition: transform 0.25s;
+    display: inline-block;
+  }
+
+  /* ── Panel técnico ── */
+  .sp-panel {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-left: 3px solid #c8922a;
+    border-left-color: var(--color-accent, #c8922a);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    color: #9dafc5;
+    color: var(--color-text-muted, #9dafc5);
+    line-height: 1.7;
+    /* animación de apertura */
+    animation: panel-open 0.3s ease forwards;
+  }
+  .sp-panel--center { border-radius: 6px; border-left: none;
+                      border-top: 3px solid var(--color-accent, #c8922a); }
+  .sp-panel__label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    margin-bottom: 0.5rem;
+  }
+
+  @keyframes panel-open {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BLOQUE 3: Número gigante ── */
+  .sp-block--dato {
+    background-color: #111d30;
+    background-color: var(--color-bg-dark, #111d30);
+  }
+
+  .sp-block__inner--dato {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sp-numero-wrap {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    line-height: 1;
+    margin: 1rem 0;
+  }
+
+  .sp-numero {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(7rem, 22vw, 14rem);
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    /* sombra dorada suave */
+    text-shadow: 0 0 60px rgba(200,146,42,0.25);
+    transition: text-shadow 0.3s;
+  }
+
+  .sp-numero__pct {
+    font-family: var(--font-display, 'Georgia', serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    color: #c8922a;
+    color: var(--color-accent, #c8922a);
+    margin-top: 1rem;
+    line-height: 1;
+  }
+
+  .sp-bajada {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: #f0f4f8;
+    color: var(--color-text, #f0f4f8);
+    line-height: 1.6;
+    max-width: 520px;
+    text-align: center;
+  }
+
+  .sp-fuente {
+    font-size: 0.75rem;
+    color: #6b83a0;
+    color: var(--color-text-dim, #6b83a0);
+    text-align: center;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── BLOQUE 5: Cierre ── */
+  .sp-block--cierre {
+    border-bottom: none;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(200,146,42,0.07) 0%, transparent 70%),
+      #1a2942;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgba(200,146,42,0.07) 0%, transparent 70%),
+      var(--color-bg, #1a2942);
+  }
+
+  .sp-block__inner--cierre {
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .sp-heading--cierre {
+    font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+  }
+
+  /* ── CTA final ── */
+  .sp-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85em 2.1em;
+    background: #c8922a;
+    background: var(--color-accent, #c8922a);
+    color: #111d30;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 6px;
+    border-radius: var(--radius, 6px);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(200,146,42,0.28);
+  }
+  .sp-cta:hover {
+    background: #e0b254;
+    background: var(--color-accent-light, #e0b254);
+    transform: translateY(-2px);
+    color: #111d30;
+  }
+  .sp-cta__arrow { transition: transform 0.2s; }
+  .sp-cta:hover .sp-cta__arrow { transform: translateY(3px); }
+
+  /* ── Indicador de scroll ── */
+  .sp-scroll-hint {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .sp-scroll-hint__line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(200,146,42,0.6), transparent);
+    animation: scroll-hint-pulse 2s ease-in-out infinite;
+  }
+  @keyframes scroll-hint-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+    50%       { opacity: 1;   transform: scaleY(1); }
+  }
+
+  /* ── Móvil ── */
+  @media (max-width: 600px) {
+    .sp-block {
+      padding: 5rem 1.25rem;
+      min-height: 90svh;
+    }
+    .sp-heading { letter-spacing: -0.01em; }
+  }
+</style>
+
+<!-- ── SCRIPT: IntersectionObserver + contador + toggles ── -->
+<script>
+  // ── 1. Reveal on scroll ──────────────────────────────────
+  const revealBlocks = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Disparar contador si este bloque tiene uno
+          const counter = entry.target.querySelector<HTMLElement>('#sp-counter');
+          if (counter && !counter.dataset.counted) {
+            counter.dataset.counted = 'true';
+            animateCounter(counter);
+          }
+        }
+      });
+    },
+    {
+      threshold: 0.15,   // dispara cuando el 15% del bloque es visible
+      rootMargin: '0px 0px -60px 0px',
+    }
+  );
+
+  revealBlocks.forEach((el) => revealObserver.observe(el));
+
+  // ── 2. Contador animado ─────────────────────────────────
+  function animateCounter(el: HTMLElement) {
+    const target = parseInt(el.dataset.target ?? '0', 10);
+    const duration = 1800; // ms
+    const start = performance.now();
+
+    function step(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // easing: ease-out cúbico
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(eased * target);
+      el.textContent = String(current);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  // ── 3. Toggles "Ver dato técnico" ───────────────────────
+  const toggleBtns = document.querySelectorAll<HTMLButtonElement>('[data-toggle]');
+
+  toggleBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const panel = btn.nextElementSibling as HTMLElement | null;
+      if (!panel) return;
+
+      if (expanded) {
+        // cerrar
+        btn.setAttribute('aria-expanded', 'false');
+        panel.setAttribute('aria-hidden', 'true');
+        panel.hidden = true;
+      } else {
+        // abrir
+        btn.setAttribute('aria-expanded', 'true');
+        panel.setAttribute('aria-hidden', 'false');
+        panel.hidden = false;
+      }
+    });
+  });
+</script>
