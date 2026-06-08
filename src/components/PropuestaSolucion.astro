@@ -361,10 +361,14 @@
   .ps-pdf-wrap {
     padding: 6rem 1.5rem;
     border-top: 1px solid rgba(255,255,255,0.06);
-    /* reveal: estado inicial */
+    /* Sin JS: visible por defecto. Transición siempre presente. */
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  /* JS activo: ocultar inicialmente para animar */
+  .js-ready [data-sol-reveal] {
     opacity: 0;
     transform: translateY(36px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
   }
   .ps-wrap,
   .ps-pdf-wrap {
@@ -380,10 +384,10 @@
     background-color: var(--color-bg-section, #1e2f4a);
   }
 
-  /* visible */
+  /* visible (IntersectionObserver o timeout de seguridad) */
   [data-sol-reveal].is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   .ps-inner {
@@ -678,6 +682,15 @@
 
 <!-- ── SCRIPT: Reveal secciones + animación dona ── -->
 <script>
+  // ── 0. Marcar JS como activo + timeout de seguridad ─────
+  document.documentElement.classList.add('js-ready');
+
+  setTimeout(function () {
+    document.querySelectorAll('[data-sol-reveal]').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }, 3000);
+
   // ── 1. Reveal de secciones ───────────────────────────────
   const solSections = document.querySelectorAll<HTMLElement>('[data-sol-reveal]');
 

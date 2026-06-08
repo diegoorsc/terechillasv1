@@ -251,16 +251,20 @@ BLOQUE 5 — CIERRE / PUENTE A LA SOLUCIÓN
     justify-content: center;
     padding: 6rem 1.5rem;
     border-bottom: 1px solid rgba(255,255,255,0.06);
-    /* Estado inicial: invisible, desplazado hacia abajo */
-    opacity: 0;
-    transform: translateY(40px);
+    /* Sin JS: visible por defecto. JS añade .js-ready al <html> para habilitar animación. */
     transition: opacity 0.75s ease, transform 0.75s ease;
   }
 
-  /* Estado visible (clase añadida por IntersectionObserver) */
+  /* JS activo: ocultar inicialmente para animar */
+  .js-ready .sp-block {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  /* Estado visible (clase añadida por IntersectionObserver o por timeout de seguridad) */
   .sp-block.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   .sp-block__inner {
@@ -524,6 +528,16 @@ BLOQUE 5 — CIERRE / PUENTE A LA SOLUCIÓN
 
 <!-- ── SCRIPT: IntersectionObserver + contador + toggles ── -->
 <script>
+  // ── 0. Marcar JS como activo (activa CSS de ocultación + animación) ──
+  document.documentElement.classList.add('js-ready');
+
+  // ── Timeout de seguridad: si tras 3 s algo sigue invisible, forzar visibilidad ──
+  setTimeout(function () {
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }, 3000);
+
   // ── 1. Reveal on scroll ──────────────────────────────────
   const revealBlocks = document.querySelectorAll<HTMLElement>('[data-reveal]');
 

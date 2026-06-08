@@ -276,15 +276,19 @@ const datosSequia = [
     letter-spacing: -0.02em;
   }
 
-  /* reveal on scroll */
+  /* reveal on scroll — sin JS: visible por defecto */
   [data-tr-reveal] {
-    opacity: 0;
-    transform: translateY(32px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
+  /* JS activo: ocultar inicialmente para animar */
+  .js-ready [data-tr-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  /* visible (IntersectionObserver o timeout de seguridad) */
   [data-tr-reveal].is-visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
   }
 
   /* ══ HERO ══ */
@@ -538,6 +542,16 @@ const datosSequia = [
 </style>
 
 <script>
+  // Marcar JS como activo (activa CSS de ocultación + animación)
+  document.documentElement.classList.add('js-ready');
+
+  // Timeout de seguridad: fuerza visibilidad tras 3 s
+  setTimeout(function () {
+    document.querySelectorAll('[data-tr-reveal]').forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }, 3000);
+
   // Reveal on scroll — mismo patrón que el resto del sitio
   const trSections = document.querySelectorAll<HTMLElement>('[data-tr-reveal]');
   const trObserver = new IntersectionObserver(

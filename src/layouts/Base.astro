@@ -43,11 +43,21 @@ const currentPath = Astro.url.pathname;
 
     <!-- global.css importado en frontmatter para que Astro lo procese correctamente -->
 
-    <!-- Netlify Identity Widget ─────────────────────────────────────────
-         Permite que el botón "Log in" de cualquier página del sitio abra
-         el flujo de autenticación y redirija a /admin/ tras hacer login.
-         Solo añade peso cuando el usuario abre el modal; el script es lazy. -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity: redirige tokens de invitación/recuperación al panel CMS.
+         No carga el widget en páginas públicas (evita errores CORS que bloquean JS).
+         El widget completo vive solo en public/admin/index.html. -->
+    <script>
+      (function () {
+        var hash = window.location.hash;
+        if (
+          hash.indexOf('invite_token=') !== -1 ||
+          hash.indexOf('confirmation_token=') !== -1 ||
+          hash.indexOf('recovery_token=') !== -1
+        ) {
+          document.location.href = '/admin/' + hash;
+        }
+      })();
+    </script>
   </head>
 
   <body>
@@ -59,52 +69,5 @@ const currentPath = Astro.url.pathname;
 
     <Footer />
 
-    <!-- Netlify Identity: manejo de tokens y redirección ───────────────
-         Cubre tres casos:
-         1. invite_token en la URL  → abre el widget para crear contraseña
-         2. recovery_token en la URL → abre el widget para resetear contraseña
-         3. login completado        → redirige a /admin/
-    -->
-    <script>
-      (function () {
-        // El widget puede no estar listo de forma síncrona; esperamos al evento
-        // nativo que dispara netlify-identity-widget cuando termina de cargar.
-        function initIdentity() {
-          var ni = window.netlifyIdentity;
-          if (!ni) return;
-
-          ni.on('init', function (user) {
-            // Detectar tokens de invitación o recuperación en el hash
-            var hash = window.location.hash;
-            if (
-              hash.indexOf('invite_token=') !== -1 ||
-              hash.indexOf('recovery_token=') !== -1
-            ) {
-              // El widget lee el hash por sí solo; solo necesita que lo abramos
-              ni.open();
-              return;
-            }
-
-            // Sin token: registrar redirección post-login
-            if (!user) {
-              ni.on('login', function () {
-                document.location.href = '/admin/';
-              });
-            }
-          });
-
-          // Por si el evento 'init' ya se disparó antes de que este script
-          // se ejecutara (race condition en páginas rápidas)
-          if (ni.currentUser && ni.currentUser()) return;
-        }
-
-        // Ejecutar ahora si el widget ya está disponible; si no, esperar DOMContentLoaded
-        if (window.netlifyIdentity) {
-          initIdentity();
-        } else {
-          document.addEventListener('DOMContentLoaded', initIdentity);
-        }
-      })();
-    </script>
   </body>
 </html>
