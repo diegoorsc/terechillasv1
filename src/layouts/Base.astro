@@ -59,19 +59,52 @@ const currentPath = Astro.url.pathname;
 
     <Footer />
 
-    <!-- Redirección post-login de Netlify Identity ──────────────────────
-         Cuando el usuario completa el login en cualquier página, lo lleva
-         a /admin/. Sin esto, el widget redirige a la raíz del sitio. -->
+    <!-- Netlify Identity: manejo de tokens y redirección ───────────────
+         Cubre tres casos:
+         1. invite_token en la URL  → abre el widget para crear contraseña
+         2. recovery_token en la URL → abre el widget para resetear contraseña
+         3. login completado        → redirige a /admin/
+    -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', (user) => {
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
-          }
-        });
-      }
+      (function () {
+        // El widget puede no estar listo de forma síncrona; esperamos al evento
+        // nativo que dispara netlify-identity-widget cuando termina de cargar.
+        function initIdentity() {
+          var ni = window.netlifyIdentity;
+          if (!ni) return;
+
+          ni.on('init', function (user) {
+            // Detectar tokens de invitación o recuperación en el hash
+            var hash = window.location.hash;
+            if (
+              hash.indexOf('invite_token=') !== -1 ||
+              hash.indexOf('recovery_token=') !== -1
+            ) {
+              // El widget lee el hash por sí solo; solo necesita que lo abramos
+              ni.open();
+              return;
+            }
+
+            // Sin token: registrar redirección post-login
+            if (!user) {
+              ni.on('login', function () {
+                document.location.href = '/admin/';
+              });
+            }
+          });
+
+          // Por si el evento 'init' ya se disparó antes de que este script
+          // se ejecutara (race condition en páginas rápidas)
+          if (ni.currentUser && ni.currentUser()) return;
+        }
+
+        // Ejecutar ahora si el widget ya está disponible; si no, esperar DOMContentLoaded
+        if (window.netlifyIdentity) {
+          initIdentity();
+        } else {
+          document.addEventListener('DOMContentLoaded', initIdentity);
+        }
+      })();
     </script>
   </body>
 </html>
