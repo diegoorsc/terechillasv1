@@ -3,19 +3,16 @@ import Base from '../layouts/Base.astro';
 import integrantesData from '../content/equipo/integrantes.json';
 const integrantes = integrantesData.integrantes;
 
-// Datos del profesor guía — editar aquí cuando se tenga el apellido
+// Datos del docente guía
 const profesorGuia = {
-  nombre: 'Sergio',
-  apellido: '',          // ← completar cuando esté disponible
+  nombre: 'Sergio Oyarzún',
   descripcion:
-    'Nuestro profesor guía nos acompañó en cada etapa del proceso: '
+    'Nuestro docente guía nos acompañó en cada etapa del proceso: '
     + 'desde el diagnóstico territorial hasta la redacción de la '
     + 'Iniciativa Juvenil de Ley, orientando la investigación y '
     + 'el rigor argumentativo de la propuesta.',
 };
-const nombreProfesor = [profesorGuia.nombre, profesorGuia.apellido]
-  .filter(Boolean)
-  .join(' ');
+const nombreProfesor = profesorGuia.nombre;
 ---
 
 <Base
@@ -86,7 +83,7 @@ const nombreProfesor = [profesorGuia.nombre, profesorGuia.apellido]
       <div class="eq-profesor__texto">
         <p class="eq-section-eyebrow">Acompañamiento académico</p>
         <h2 class="eq-profesor__nombre">
-          Profesor guía: <span>{nombreProfesor || 'Profesor Sergio'}</span>
+          Docente guía: <span>Profesor {nombreProfesor}</span>
         </h2>
         <p class="eq-profesor__desc">{profesorGuia.descripcion}</p>
       </div>

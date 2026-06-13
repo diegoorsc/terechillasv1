@@ -210,6 +210,13 @@ function iniciales(nombre: string): string {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
+    /* Última fila con menos de 3 items: tarjetas al máx. 340px, centradas */
+    justify-items: stretch;
+  }
+
+  /* Cuando la 7ª tarjeta queda sola, se centra en la columna del medio */
+  .pa-card:last-child:nth-child(3n + 1) {
+    grid-column: 2 / 3;
   }
 
   /* Tarjeta */
