@@ -1,11 +1,24 @@
 {
   "items": [
-    { "nombre": "Paulina Vodanovic Rojas", "cargo": "Senadora" },
-    { "nombre": "Pedro Araya",             "cargo": "Senador" },
-    { "nombre": "Nathalie Castillo",       "cargo": "Diputada" },
-    { "nombre": "Marco Antonio Sulantay", "cargo": "Diputado" },
-    { "nombre": "Denis Cortés Aguilera",  "cargo": "Alcalde de Illapel" },
-    { "nombre": "Maximiliano Bravo",      "cargo": "Concejal de Illapel" },
-    { "nombre": "Iraci Hassler",          "cargo": "Diputada" }
+    {
+      "nombre": "Paulina Vodanovic Rojas",
+      "cargo": "Senadora"
+    },
+    {
+      "nombre": "Pedro Araya",
+      "cargo": "Senador"
+    },
+    {
+      "nombre": "Nathalie Castillo",
+      "cargo": "Diputada"
+    },
+    {
+      "nombre": "Marco Antonio Sulantay",
+      "cargo": "Diputado"
+    },
+    {
+      "nombre": "Iraci Hassler",
+      "cargo": "Diputada"
+    }
   ]
 }
